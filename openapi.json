@@ -1,0 +1,1909 @@
+{
+  "openapi": "3.1.0",
+  "info": { "title": "Ola Agent Backend API", "version": "1.0.0" },
+  "paths": {
+    "/metrics": {
+      "get": {
+        "summary": "Metrics",
+        "description": "Endpoint that serves Prometheus metrics.",
+        "operationId": "metrics_metrics_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      }
+    },
+    "/ibk/auth/login": {
+      "post": {
+        "tags": ["User Auth"],
+        "summary": "Login",
+        "operationId": "login_ibk_auth_login_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": { "$ref": "#/components/schemas/Body_login_ibk_auth_login_post" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/Token" } }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ibk/auth/me": {
+      "get": {
+        "tags": ["User Auth"],
+        "summary": "Read Users Me",
+        "operationId": "read_users_me_ibk_auth_me_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        },
+        "security": [{ "OAuth2PasswordBearer": [] }]
+      }
+    },
+    "/ibk/admin/upload-fund-excel": {
+      "post": {
+        "tags": ["Admin Fund/ETF Management"],
+        "summary": "Upload Fund Excel",
+        "operationId": "upload_fund_excel_ibk_admin_upload_fund_excel_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_upload_fund_excel_ibk_admin_upload_fund_excel_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ibk/admin/uploaded-funds": {
+      "get": {
+        "tags": ["Admin Fund/ETF Management"],
+        "summary": "Get Uploaded Funds",
+        "operationId": "get_uploaded_funds_ibk_admin_uploaded_funds_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      }
+    },
+    "/ibk/admin/uploaded-fund": {
+      "post": {
+        "tags": ["Admin Fund/ETF Management"],
+        "summary": "Upload Single Fund",
+        "operationId": "upload_single_fund_ibk_admin_uploaded_fund_post",
+        "requestBody": {
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/FundUploadRequest" } }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Admin Fund/ETF Management"],
+        "summary": "Delete Uploaded Fund",
+        "operationId": "delete_uploaded_fund_ibk_admin_uploaded_fund_delete",
+        "requestBody": {
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/FundDeleteRequest" } }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        },
+        "security": [{ "OAuth2PasswordBearer": [] }]
+      }
+    },
+    "/ibk/admin/upload-etf-excel": {
+      "post": {
+        "tags": ["Admin Fund/ETF Management"],
+        "summary": "Upload Etf Excel",
+        "operationId": "upload_etf_excel_ibk_admin_upload_etf_excel_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_upload_etf_excel_ibk_admin_upload_etf_excel_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ibk/admin/uploaded-etfs": {
+      "get": {
+        "tags": ["Admin Fund/ETF Management"],
+        "summary": "Get Uploaded Etfs",
+        "operationId": "get_uploaded_etfs_ibk_admin_uploaded_etfs_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      }
+    },
+    "/ibk/admin/uploaded-etf": {
+      "post": {
+        "tags": ["Admin Fund/ETF Management"],
+        "summary": "Upload Single Etf",
+        "operationId": "upload_single_etf_ibk_admin_uploaded_etf_post",
+        "requestBody": {
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/ETFUploadRequest" } }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Admin Fund/ETF Management"],
+        "summary": "Delete Uploaded Etf",
+        "operationId": "delete_uploaded_etf_ibk_admin_uploaded_etf_delete",
+        "requestBody": {
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/ETFDeleteRequest" } }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ibk/admin/users": {
+      "post": {
+        "tags": ["Admin Fund/ETF Management"],
+        "summary": "Create User Admin",
+        "operationId": "create_user_admin_ibk_admin_users_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/UserCreate" } }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/User" } } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Admin Fund/ETF Management"],
+        "summary": "List Users",
+        "operationId": "list_users_ibk_admin_users_get",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "description": "Filter by status: 승인완료, 승인대기, 승인거절, 회원탈퇴. status 파라미터가 없으면 상태별로 정렬됩니다: 승인대기(1순위) > 승인거절(2순위) > 승인완료(3순위) > 이름순",
+              "title": "Status"
+            },
+            "description": "Filter by status: 승인완료, 승인대기, 승인거절, 회원탈퇴. status 파라미터가 없으면 상태별로 정렬됩니다: 승인대기(1순위) > 승인거절(2순위) > 승인완료(3순위) > 이름순"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/User" },
+                  "title": "Response List Users Ibk Admin Users Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ibk/admin/users/{username}": {
+      "get": {
+        "tags": ["Admin Fund/ETF Management"],
+        "summary": "Get User By Username",
+        "operationId": "get_user_by_username_ibk_admin_users__username__get",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Username" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/User" } } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Admin Fund/ETF Management"],
+        "summary": "Update User Admin",
+        "operationId": "update_user_admin_ibk_admin_users__username__patch",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Username" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/UserUpdate" } }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/User" } } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Admin Fund/ETF Management"],
+        "summary": "Delete User Admin",
+        "operationId": "delete_user_admin_ibk_admin_users__username__delete",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Username" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ibk/admin/users/{username}/approve": {
+      "patch": {
+        "tags": ["Admin Fund/ETF Management"],
+        "summary": "Approve User",
+        "description": "사용자를 승인완료 상태로 변경합니다.",
+        "operationId": "approve_user_ibk_admin_users__username__approve_patch",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Username" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ibk/admin/users/{username}/reject": {
+      "patch": {
+        "tags": ["Admin Fund/ETF Management"],
+        "summary": "Reject User",
+        "description": "사용자를 승인거절 상태로 변경합니다.",
+        "operationId": "reject_user_ibk_admin_users__username__reject_patch",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Username" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ibk/admin/users/{username}/withdraw": {
+      "patch": {
+        "tags": ["Admin Fund/ETF Management"],
+        "summary": "Withdraw User",
+        "description": "사용자를 회원탈퇴 상태로 변경합니다.",
+        "operationId": "withdraw_user_ibk_admin_users__username__withdraw_patch",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Username" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ibk/generate-content": {
+      "post": {
+        "tags": ["IBK App"],
+        "summary": "Generate Content",
+        "description": "IBK content1 생성 API\n- period: daily, weekly, monthly 중 하나",
+        "operationId": "generate_content_ibk_generate_content_post",
+        "parameters": [
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Period to process: daily, weekly, or monthly",
+              "enum": ["daily", "weekly", "monthly"],
+              "default": "daily",
+              "title": "Period"
+            },
+            "description": "Period to process: daily, weekly, or monthly"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ibk/generate-graph-selection": {
+      "post": {
+        "tags": ["IBK App"],
+        "summary": "Generate Graph Selection",
+        "description": "IBK content1 + 그래프 매칭 생성 API\n- period: daily, weekly, monthly 중 하나\n- content1 생성 후 그래프 매칭까지 실행",
+        "operationId": "generate_graph_selection_ibk_generate_graph_selection_post",
+        "parameters": [
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Period to process: daily, weekly, or monthly",
+              "enum": ["daily", "weekly", "monthly"],
+              "default": "daily",
+              "title": "Period"
+            },
+            "description": "Period to process: daily, weekly, or monthly"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ibk/generate-portfolio-recommendation": {
+      "post": {
+        "tags": ["IBK App"],
+        "summary": "Generate Portfolio Recommendation",
+        "description": "IBK portfolio recommendation 생성 API\n- period: daily, weekly, monthly 중 하나",
+        "operationId": "generate_portfolio_recommendation_ibk_generate_portfolio_recommendation_post",
+        "parameters": [
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Period to process: daily",
+              "enum": ["daily"],
+              "default": "daily",
+              "title": "Period"
+            },
+            "description": "Period to process: daily"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ibk/content-summary/content-meta/{content_meta_id}": {
+      "get": {
+        "tags": ["IBK App"],
+        "summary": "Get Content Summary",
+        "description": "Returns, for each category and date, a single JSON object combining content from both tables,\nincluding graph_name and graph_image_path.",
+        "operationId": "get_content_summary_ibk_content_summary_content_meta__content_meta_id__get",
+        "security": [{ "OAuth2PasswordBearer": [] }],
+        "parameters": [
+          {
+            "name": "content_meta_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "title": "Content Meta Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ibk/content-meta": {
+      "get": {
+        "tags": ["IBK App"],
+        "summary": "Get Content Meta",
+        "operationId": "get_content_meta_ibk_content_meta_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        },
+        "security": [{ "OAuth2PasswordBearer": [] }]
+      },
+      "post": {
+        "tags": ["IBK App"],
+        "summary": "Create Content Meta",
+        "operationId": "create_content_meta_ibk_content_meta_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ContentMetaCreateRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        },
+        "security": [{ "OAuth2PasswordBearer": [] }]
+      }
+    },
+    "/ibk/content-meta/{content_meta_id}": {
+      "delete": {
+        "tags": ["IBK App"],
+        "summary": "Delete Content Meta",
+        "description": "Content meta를 soft delete로 처리합니다.\n\n- deleted_at 필드에 현재 시간을 설정하여 삭제 표시를 합니다\n- 실제로 데이터를 삭제하지 않고 삭제 표시만 합니다\n- 자신의 content meta만 삭제할 수 있습니다\n- 삭제된 content meta는 GET /content-meta에서 조회되지 않습니다\n\nArgs:\n    content_meta_id: 삭제할 content meta의 ID\n\nReturns:\n    - success: True\n    - message: 삭제 완료 메시지\n    - deleted_at: 삭제된 시간 (ISO 형식)\n\nRaises:\n    - 404: Content meta를 찾을 수 없거나 이미 삭제된 경우\n    - 403: 자신의 content meta가 아닌 경우\n    - 500: 서버 오류",
+        "operationId": "delete_content_meta_ibk_content_meta__content_meta_id__delete",
+        "security": [{ "OAuth2PasswordBearer": [] }],
+        "parameters": [
+          {
+            "name": "content_meta_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "title": "Content Meta Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health Check",
+        "description": "서버 및 LLM 프록시의 상태를 확인하는 엔드포인트입니다.",
+        "operationId": "health_check_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      }
+    },
+    "/models": {
+      "get": {
+        "summary": "Get Models",
+        "description": "사용 가능한 LLM 모델 목록을 반환하는 엔드포인트입니다.",
+        "operationId": "get_models_models_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      }
+    },
+    "/proxy-test": {
+      "get": {
+        "summary": "Proxy Test",
+        "description": "LLM 프록시 서버와의 연결을 테스트하는 엔드포인트입니다.",
+        "operationId": "proxy_test_proxy_test_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      }
+    },
+    "/copilotkit/{path}": {
+      "get": {
+        "tags": ["chat"],
+        "summary": "Make Handler",
+        "operationId": "make_handler_copilotkit__path__post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      },
+      "put": {
+        "tags": ["chat"],
+        "summary": "Make Handler",
+        "operationId": "make_handler_copilotkit__path__post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      },
+      "post": {
+        "tags": ["chat"],
+        "summary": "Make Handler",
+        "operationId": "make_handler_copilotkit__path__post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["chat"],
+        "summary": "Make Handler",
+        "operationId": "make_handler_copilotkit__path__post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      },
+      "options": {
+        "tags": ["chat"],
+        "summary": "Make Handler",
+        "operationId": "make_handler_copilotkit__path__post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      }
+    },
+    "/chat/message": {
+      "post": {
+        "tags": ["chat"],
+        "summary": "Send Chat Message",
+        "description": "채팅 메시지를 보내고 응답을 받습니다.",
+        "operationId": "send_chat_message_chat_message_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/api__krx__chat__ChatMessageRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/session/create": {
+      "post": {
+        "tags": ["chat"],
+        "summary": "Create New Chat Session",
+        "description": "새로운 채팅 세션을 생성합니다.",
+        "operationId": "create_new_chat_session_chat_session_create_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      }
+    },
+    "/chat/session/{session_id}/history": {
+      "get": {
+        "tags": ["chat"],
+        "summary": "Get Chat History",
+        "description": "채팅 세션의 대화 히스토리를 조회합니다.",
+        "operationId": "get_chat_history_chat_session__session_id__history_get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Session Id" }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 50, "title": "Limit" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/session/{session_id}": {
+      "delete": {
+        "tags": ["chat"],
+        "summary": "Delete Chat Session Endpoint",
+        "description": "채팅 세션을 삭제합니다.",
+        "operationId": "delete_chat_session_endpoint_chat_session__session_id__delete",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Session Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/sessions": {
+      "get": {
+        "tags": ["chat"],
+        "summary": "List Chat Sessions",
+        "description": "모든 채팅 세션 목록을 조회합니다.",
+        "operationId": "list_chat_sessions_chat_sessions_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      }
+    },
+    "/chat/sessions/cleanup": {
+      "post": {
+        "tags": ["chat"],
+        "summary": "Cleanup Old Sessions",
+        "description": "오래된 채팅 세션들을 정리합니다.",
+        "operationId": "cleanup_old_sessions_chat_sessions_cleanup_post",
+        "parameters": [
+          {
+            "name": "max_age_hours",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 24, "title": "Max Age Hours" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/session/{session_id}/context": {
+      "get": {
+        "tags": ["chat"],
+        "summary": "Get Session Context",
+        "description": "세션의 컨텍스트 정보를 조회합니다.",
+        "operationId": "get_session_context_chat_session__session_id__context_get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Session Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["chat"],
+        "summary": "Update Session Context",
+        "description": "세션의 컨텍스트를 수동으로 업데이트합니다.",
+        "operationId": "update_session_context_chat_session__session_id__context_patch",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Session Id" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UpdateContextRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/session/{session_id}/context/reset": {
+      "post": {
+        "tags": ["chat"],
+        "summary": "Reset Session Context",
+        "description": "세션의 컨텍스트를 초기화합니다.",
+        "operationId": "reset_session_context_chat_session__session_id__context_reset_post",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Session Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/sessions/context/summary": {
+      "get": {
+        "tags": ["chat"],
+        "summary": "Get All Sessions Context Summary",
+        "description": "모든 세션의 컨텍스트 요약을 조회합니다.",
+        "operationId": "get_all_sessions_context_summary_chat_sessions_context_summary_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      }
+    },
+    "/chat/stream/copilotkit": {
+      "post": {
+        "tags": ["chat"],
+        "summary": "Copilotkit Stream Chat",
+        "description": "KRX DART 워크플로우용 CopilotKit 스트리밍 채팅 엔드포인트.\n각 단계별 state와 step 정보를 실시간으로 전송하고, 마지막에 최종 답변을 반환합니다.",
+        "operationId": "copilotkit_stream_chat_chat_stream_copilotkit_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/api__krx__chat__StreamChatRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/krx/ui/recommendation-question": {
+      "get": {
+        "tags": ["krx/ui"],
+        "summary": "Get Ui Recommendation Question",
+        "description": "documents/krx/question/recommendation_questions.json에서 데이터를 읽어 UI에 반환합니다.",
+        "operationId": "get_ui_recommendation_question_krx_ui_recommendation_question_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      }
+    },
+    "/api/ibk_securities/chat/message": {
+      "post": {
+        "tags": ["ibk_securities_chat"],
+        "summary": "Chat Message",
+        "description": "IBK Securities 관련 질문에 대한 응답을 생성합니다.",
+        "operationId": "chat_message_api_ibk_securities_chat_message_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/api__ibk_securities__chat__ChatMessageRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ibk_securities/chat/stream": {
+      "post": {
+        "tags": ["ibk_securities_chat"],
+        "summary": "Ibk Securities Copilotkit Stream Chat",
+        "description": "IBK Securities 워크플로우용 CopilotKit 스트리밍 채팅 엔드포인트.\n각 단계별 state와 step 정보를 실시간으로 전송하고, 마지막에 최종 답변을 반환합니다.",
+        "operationId": "ibk_securities_copilotkit_stream_chat_api_ibk_securities_chat_stream_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/api__ibk_securities__chat__StreamChatRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ibk_securities/health": {
+      "get": {
+        "tags": ["ibk_securities_chat"],
+        "summary": "Health Check",
+        "description": "IBK Securities 워크플로우 상태 확인",
+        "operationId": "health_check_api_ibk_securities_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      }
+    },
+    "/api/ibk_securities/info": {
+      "get": {
+        "tags": ["ibk_securities_chat"],
+        "summary": "Get Workflow Info",
+        "description": "IBK Securities 워크플로우 정보 조회",
+        "operationId": "get_workflow_info_api_ibk_securities_info_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      }
+    },
+    "/api/ibk_securities/session/create": {
+      "post": {
+        "tags": ["ibk_securities_chat"],
+        "summary": "Create Ibk Securities Session",
+        "description": "IBK Securities 전용 채팅 세션을 생성합니다.",
+        "operationId": "create_ibk_securities_session_api_ibk_securities_session_create_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      }
+    },
+    "/api/ibk_securities/session/{session_id}/context": {
+      "get": {
+        "tags": ["ibk_securities_chat"],
+        "summary": "Get Ibk Securities Session Context",
+        "description": "IBK Securities 세션의 컨텍스트 정보를 조회합니다.",
+        "operationId": "get_ibk_securities_session_context_api_ibk_securities_session__session_id__context_get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Session Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ibk_securities/session/{session_id}/context/reset": {
+      "post": {
+        "tags": ["ibk_securities_chat"],
+        "summary": "Reset Ibk Securities Session Context",
+        "description": "IBK Securities 세션의 컨텍스트를 초기화합니다.",
+        "operationId": "reset_ibk_securities_session_context_api_ibk_securities_session__session_id__context_reset_post",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Session Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ibk_securities/session/{session_id}": {
+      "delete": {
+        "tags": ["ibk_securities_chat"],
+        "summary": "Delete Ibk Securities Session",
+        "description": "IBK Securities 세션을 삭제합니다.",
+        "operationId": "delete_ibk_securities_session_api_ibk_securities_session__session_id__delete",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Session Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ibk_securities/dataset/Price": {
+      "post": {
+        "tags": ["IBK Securities Dataset"],
+        "summary": "Get Price Eod Data",
+        "description": "미국 주식 가격 및 배당 데이터 조회 API\n\n- **ticker**: 주식 심볼 (예: DVA, AAPL)\n- **date**: 날짜 (YYYYMMDD 형식)\n- **open/high/low/close**: 가격 정보\n- **volume**: 거래량\n- **dividend**: 배당금\n- **yield**: 배당수익률",
+        "operationId": "get_price_eod_data_api_ibk_securities_dataset_Price_post",
+        "requestBody": {
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/DatasetRequestDto" } }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/DatasetResponseDto" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ibk_securities/dataset/Finance": {
+      "post": {
+        "tags": ["IBK Securities Dataset"],
+        "summary": "Get Finance Data",
+        "description": "미국 주식 재무 데이터 조회 API\n\n- **ticker**: 주식 심볼 (예: DVA, AAPL)\n- **date**: 날짜 (YYYYMMDD 형식)\n- **revenue**: 매출액\n- **net_income**: 순이익\n- **total_assets**: 총자산\n- **total_debt**: 총부채\n- **market_cap**: 시가총액\n- **pe_ratio**: PER\n- **eps**: 주당순이익\n- **roe**: 자기자본수익률\n- **roa**: 총자산수익률",
+        "operationId": "get_finance_data_api_ibk_securities_dataset_Finance_post",
+        "requestBody": {
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/DatasetRequestDto" } }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/DatasetResponseDto" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ibk_securities/dataset/fields": {
+      "get": {
+        "tags": ["IBK Securities Dataset"],
+        "summary": "Get Available Fields",
+        "description": "사용 가능한 필드 목록 조회",
+        "operationId": "get_available_fields_api_ibk_securities_dataset_fields_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      }
+    },
+    "/api/ibk_securities/dataset/validate": {
+      "post": {
+        "tags": ["IBK Securities Dataset"],
+        "summary": "Validate Request",
+        "description": "요청 데이터 유효성 검증",
+        "operationId": "validate_request_api_ibk_securities_dataset_validate_post",
+        "requestBody": {
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/DatasetRequestDto" } }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ibk_securities/dataset/health": {
+      "get": {
+        "tags": ["IBK Securities Dataset"],
+        "summary": "Health Check",
+        "description": "Dataset API 상태 확인",
+        "operationId": "health_check_api_ibk_securities_dataset_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      }
+    },
+    "/api/ibk_securities/dataset/example": {
+      "get": {
+        "tags": ["IBK Securities Dataset"],
+        "summary": "Get Example Request",
+        "description": "API 사용 예시",
+        "operationId": "get_example_request_api_ibk_securities_dataset_example_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Default Root Handler",
+        "operationId": "default_root_handler__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Body_login_ibk_auth_login_post": {
+        "properties": {
+          "grant_type": {
+            "anyOf": [{ "type": "string", "pattern": "^password$" }, { "type": "null" }],
+            "title": "Grant Type"
+          },
+          "username": { "type": "string", "title": "Username" },
+          "password": { "type": "string", "format": "password", "title": "Password" },
+          "scope": { "type": "string", "title": "Scope", "default": "" },
+          "client_id": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Client Id"
+          },
+          "client_secret": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "format": "password",
+            "title": "Client Secret"
+          }
+        },
+        "type": "object",
+        "required": ["username", "password"],
+        "title": "Body_login_ibk_auth_login_post"
+      },
+      "Body_upload_etf_excel_ibk_admin_upload_etf_excel_post": {
+        "properties": { "file": { "type": "string", "format": "binary", "title": "File" } },
+        "type": "object",
+        "required": ["file"],
+        "title": "Body_upload_etf_excel_ibk_admin_upload_etf_excel_post"
+      },
+      "Body_upload_fund_excel_ibk_admin_upload_fund_excel_post": {
+        "properties": { "file": { "type": "string", "format": "binary", "title": "File" } },
+        "type": "object",
+        "required": ["file"],
+        "title": "Body_upload_fund_excel_ibk_admin_upload_fund_excel_post"
+      },
+      "ContentMetaCreateRequest": {
+        "properties": {
+          "title": { "type": "string", "title": "Title" },
+          "date": { "anyOf": [{}, { "type": "null" }], "title": "Date" },
+          "period": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Period" },
+          "report_type": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Report Type"
+          },
+          "ai_tone": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Ai Tone" },
+          "categories": {
+            "anyOf": [{ "items": { "type": "string" }, "type": "array" }, { "type": "null" }],
+            "title": "Categories"
+          }
+        },
+        "type": "object",
+        "required": ["title"],
+        "title": "ContentMetaCreateRequest"
+      },
+      "DatasetColumnDto": {
+        "properties": {
+          "field": { "type": "string", "title": "Field", "description": "필드명" },
+          "unit": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Unit",
+            "description": "단위"
+          },
+          "scale": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Scale",
+            "description": "스케일"
+          }
+        },
+        "type": "object",
+        "required": ["field"],
+        "title": "DatasetColumnDto"
+      },
+      "DatasetConfigDto": {
+        "properties": {
+          "visualizationType": {
+            "type": "string",
+            "title": "Visualizationtype",
+            "description": "시각화 타입",
+            "default": "table"
+          },
+          "options": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Options",
+            "description": "시각화 옵션"
+          }
+        },
+        "type": "object",
+        "title": "DatasetConfigDto"
+      },
+      "DatasetFilterConditionDto": {
+        "properties": {
+          "field": { "type": "string", "title": "Field", "description": "필터링할 필드명" },
+          "operator": {
+            "type": "string",
+            "title": "Operator",
+            "description": "연산자 (eq, neq, gt, lt, gte, lte, in, nin, contains, between)"
+          },
+          "value": { "title": "Value", "description": "필터 값" }
+        },
+        "type": "object",
+        "required": ["field", "operator", "value"],
+        "title": "DatasetFilterConditionDto"
+      },
+      "DatasetFilterDto": {
+        "properties": {
+          "conditions": {
+            "items": { "$ref": "#/components/schemas/DatasetFilterConditionDto" },
+            "type": "array",
+            "title": "Conditions",
+            "description": "필터 조건 리스트"
+          }
+        },
+        "type": "object",
+        "title": "DatasetFilterDto"
+      },
+      "DatasetRequestDto": {
+        "properties": {
+          "config": { "$ref": "#/components/schemas/DatasetConfigDto", "description": "설정 정보" },
+          "dataset_selection": {
+            "$ref": "#/components/schemas/DatasetSelectionDto",
+            "description": "데이터셋 선택 정보"
+          }
+        },
+        "type": "object",
+        "required": ["dataset_selection"],
+        "title": "DatasetRequestDto"
+      },
+      "DatasetResponseDto": {
+        "properties": {
+          "columns": {
+            "items": { "$ref": "#/components/schemas/DatasetColumnDto" },
+            "type": "array",
+            "title": "Columns",
+            "description": "컬럼 메타데이터"
+          },
+          "rows": {
+            "items": { "additionalProperties": true, "type": "object" },
+            "type": "array",
+            "title": "Rows",
+            "description": "데이터 행들"
+          },
+          "total_count": {
+            "type": "integer",
+            "title": "Total Count",
+            "description": "총 데이터 수"
+          }
+        },
+        "type": "object",
+        "required": ["columns", "rows", "total_count"],
+        "title": "DatasetResponseDto"
+      },
+      "DatasetSelectDto": {
+        "properties": {
+          "fields": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Fields",
+            "description": "조회할 필드 리스트"
+          }
+        },
+        "type": "object",
+        "required": ["fields"],
+        "title": "DatasetSelectDto"
+      },
+      "DatasetSelectionDto": {
+        "properties": {
+          "select": {
+            "$ref": "#/components/schemas/DatasetSelectDto",
+            "description": "선택할 필드 정보"
+          },
+          "filter": { "$ref": "#/components/schemas/DatasetFilterDto", "description": "필터 조건" },
+          "sort": { "$ref": "#/components/schemas/DatasetSortDto", "description": "정렬 조건" }
+        },
+        "type": "object",
+        "required": ["select"],
+        "title": "DatasetSelectionDto"
+      },
+      "DatasetSortConditionDto": {
+        "properties": {
+          "field": { "type": "string", "title": "Field", "description": "정렬할 필드명" },
+          "order": {
+            "type": "string",
+            "title": "Order",
+            "description": "정렬 순서 (asc, desc)",
+            "default": "asc"
+          },
+          "priority": {
+            "type": "integer",
+            "title": "Priority",
+            "description": "정렬 우선순위",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": ["field"],
+        "title": "DatasetSortConditionDto"
+      },
+      "DatasetSortDto": {
+        "properties": {
+          "conditions": {
+            "items": { "$ref": "#/components/schemas/DatasetSortConditionDto" },
+            "type": "array",
+            "title": "Conditions",
+            "description": "정렬 조건 리스트"
+          }
+        },
+        "type": "object",
+        "title": "DatasetSortDto"
+      },
+      "ETFDeleteRequest": {
+        "properties": { "name": { "type": "string", "title": "Name" } },
+        "type": "object",
+        "required": ["name"],
+        "title": "ETFDeleteRequest"
+      },
+      "ETFUploadRequest": {
+        "properties": {
+          "name": { "type": "string", "title": "Name" },
+          "investment_risk_level": { "type": "string", "title": "Investment Risk Level" }
+        },
+        "type": "object",
+        "required": ["name", "investment_risk_level"],
+        "title": "ETFUploadRequest"
+      },
+      "FundDeleteRequest": {
+        "properties": { "fund_name": { "type": "string", "title": "Fund Name" } },
+        "type": "object",
+        "required": ["fund_name"],
+        "title": "FundDeleteRequest"
+      },
+      "FundUploadRequest": {
+        "properties": {
+          "fund_type": { "type": "string", "title": "Fund Type" },
+          "manager_name": { "type": "string", "title": "Manager Name" },
+          "fund_code": { "type": "number", "title": "Fund Code" },
+          "association_fund_code": { "type": "string", "title": "Association Fund Code" },
+          "fund_name": { "type": "string", "title": "Fund Name" },
+          "grade": { "type": "number", "title": "Grade" },
+          "category": { "type": "string", "title": "Category" },
+          "type": { "type": "string", "title": "Type" },
+          "investment_sector": { "type": "string", "title": "Investment Sector" }
+        },
+        "type": "object",
+        "required": [
+          "fund_type",
+          "manager_name",
+          "fund_code",
+          "association_fund_code",
+          "fund_name",
+          "grade",
+          "category",
+          "type",
+          "investment_sector"
+        ],
+        "title": "FundUploadRequest"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": { "$ref": "#/components/schemas/ValidationError" },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "Token": {
+        "properties": {
+          "access_token": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Access Token"
+          },
+          "token_type": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Token Type"
+          },
+          "status": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Status" }
+        },
+        "type": "object",
+        "title": "Token"
+      },
+      "UpdateContextRequest": {
+        "properties": {
+          "key_companies": {
+            "anyOf": [{ "items": { "type": "string" }, "type": "array" }, { "type": "null" }],
+            "title": "Key Companies"
+          },
+          "analysis_preferences": {
+            "anyOf": [{ "items": { "type": "string" }, "type": "array" }, { "type": "null" }],
+            "title": "Analysis Preferences"
+          },
+          "user_expertise_level": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "User Expertise Level"
+          }
+        },
+        "type": "object",
+        "title": "UpdateContextRequest"
+      },
+      "User": {
+        "properties": {
+          "id": { "type": "integer", "title": "Id" },
+          "username": { "type": "string", "title": "Username" },
+          "name": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Name" },
+          "email": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Email" },
+          "position": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Position" },
+          "department": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Department"
+          },
+          "status": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Status" },
+          "emp_number": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Emp Number"
+          },
+          "role": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Role" },
+          "created_at": {
+            "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": ["id", "username"],
+        "title": "User"
+      },
+      "UserCreate": {
+        "properties": {
+          "username": { "type": "string", "title": "Username" },
+          "password": { "type": "string", "title": "Password" },
+          "name": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Name" },
+          "email": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Email" },
+          "position": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Position" },
+          "department": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Department"
+          },
+          "status": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Status",
+            "default": "승인대기"
+          },
+          "emp_number": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Emp Number"
+          }
+        },
+        "type": "object",
+        "required": ["username", "password"],
+        "title": "UserCreate"
+      },
+      "UserUpdate": {
+        "properties": {
+          "password": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Password" },
+          "name": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Name" },
+          "email": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Email" },
+          "position": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Position" },
+          "department": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Department"
+          },
+          "status": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Status" },
+          "emp_number": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Emp Number"
+          }
+        },
+        "type": "object",
+        "title": "UserUpdate"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": { "anyOf": [{ "type": "string" }, { "type": "integer" }] },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": { "type": "string", "title": "Message" },
+          "type": { "type": "string", "title": "Error Type" }
+        },
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError"
+      },
+      "api__ibk_securities__chat__ChatMessageRequest": {
+        "properties": {
+          "message": { "type": "string", "title": "Message" },
+          "model": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Model" },
+          "session_id": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Session Id"
+          }
+        },
+        "type": "object",
+        "required": ["message"],
+        "title": "ChatMessageRequest"
+      },
+      "api__ibk_securities__chat__StreamChatRequest": {
+        "properties": {
+          "message": { "type": "string", "title": "Message" },
+          "model": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Model" },
+          "session_id": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Session Id"
+          }
+        },
+        "type": "object",
+        "required": ["message"],
+        "title": "StreamChatRequest"
+      },
+      "api__krx__chat__ChatMessageRequest": {
+        "properties": {
+          "session_id": { "type": "string", "title": "Session Id" },
+          "message": { "type": "string", "title": "Message" },
+          "model": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Model" }
+        },
+        "type": "object",
+        "required": ["session_id", "message"],
+        "title": "ChatMessageRequest"
+      },
+      "api__krx__chat__StreamChatRequest": {
+        "properties": {
+          "session_id": { "type": "string", "title": "Session Id" },
+          "message": { "type": "string", "title": "Message" },
+          "model": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Model" }
+        },
+        "type": "object",
+        "required": ["session_id", "message"],
+        "title": "StreamChatRequest"
+      }
+    },
+    "securitySchemes": {
+      "OAuth2PasswordBearer": {
+        "type": "oauth2",
+        "flows": { "password": { "scopes": {}, "tokenUrl": "/ibk/auth/login" } }
+      }
+    }
+  }
+}
