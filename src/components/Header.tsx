@@ -3,7 +3,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { useRouter, usePathname } from 'next/navigation'
-import { Download, MessageCircle } from 'lucide-react'
+import { Download, MessageCircle, MessageCircleHeartIcon } from 'lucide-react'
 
 import { useAuth } from '@/providers/AuthContext'
 
@@ -77,7 +77,7 @@ const Header = () => {
       </div>
 
       {/* 중간 배너 - OLA Suite 소개 */}
-      <div className="relative bg-[rgba(0,97,255,0.8)] w-full px-3 py-2 flex flex-col items-center justify-center gap-1 shadow-[0px_-2px_10px_0px_rgba(223,235,255,0.3),0px_-2px_40px_0px_rgba(223,235,255,0.15)]">
+      <div className="relative bg-blue-600/80 w-full px-3 py-2 flex flex-col items-center justify-center gap-1 shadow-[0px_-2px_10px_0px_rgba(223,235,255,0.3),0px_-2px_40px_0px_rgba(223,235,255,0.15)]">
         {/* 배너 텍스트 */}
         <p className="text-sm font-bold text-white leading-5">
           <span className="font-medium">레고처럼 조립하는 간편한 금융 AI 서비스 </span>
@@ -95,7 +95,7 @@ const Header = () => {
             className="flex items-center justify-center gap-2 px-3 py-2 bg-white border border-gray-300 rounded-lg w-[120px] hover:bg-gray-50 transition-colors"
             aria-label="데모 신청하기"
           >
-            <MessageCircle className="w-4 h-4 text-gray-900" />
+            <MessageCircleHeartIcon className="w-4 h-4 text-gray-900" />
             <span className="text-xs font-medium text-gray-900 leading-4">
               데모 신청하기
             </span>
@@ -131,7 +131,7 @@ const Header = () => {
               onClick={() => handleTabClick('/chat?auth=ola-ola')}
               className={`flex items-center justify-center gap-2.5 px-3 py-2 border-b ${
                 isActiveTab('/chat')
-                  ? 'border-b-2 border-[#004ca5]'
+                  ? 'border-b-2 border-blue-500'
                   : 'border-gray-200'
               } transition-colors`}
               aria-label="금융 챗봇"
@@ -146,7 +146,7 @@ const Header = () => {
               onClick={() => handleTabClick('/main')}
               className={`flex items-center justify-center gap-2.5 px-3 py-2 border-b ${
                 isActiveTab('/main')
-                  ? 'border-b-2 border-[#004ca5]'
+                  ? 'border-b-2 border-blue-500'
                   : 'border-gray-200'
               } transition-colors`}
               aria-label="보고서 자동화"

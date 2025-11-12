@@ -86,8 +86,8 @@ function ModernChatPageBase() {
   }
 
   return (
-    <div className="h-[100dvh] md:h-screen overflow-hidden md:overflow-y-auto min-w-[340px]">
-      <div className="bg-white h-[100dvh] md:h-screen">
+    <div className="h-screen md:h-screen overflow-hidden md:overflow-y-auto min-w-[340px] max-w-[1024px] w-full rounded-xl">
+      <div className="bg-white h-screen md:h-screen">
         {/* 채팅 컨테이너 - 중앙 정렬 */}
         <div className="max-w-6xl mx-auto h-full">
           <div className="flex justify-center h-full">
@@ -114,7 +114,7 @@ function ModernChatPageBase() {
               inputValue={inputValue}
               onInputChange={setInputValue}
               activeTab={activeTab}
-              className="w-full max-w-[700px] h-full"
+              className="w-full max-w-[1024px] h-full"
             />
           </div>
         </div>

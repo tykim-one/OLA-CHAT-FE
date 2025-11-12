@@ -57,7 +57,7 @@ export default function ModernChatContainer({
           ref={scrollContainerRef}
         >
           <div className="px-4">
-            {showWelcomeMessage && welcomeConfig && (
+            {/* {showWelcomeMessage && welcomeConfig && (
               <div className="w-full pt-4 flex-shrink-0">
                 <WelcomeSection
                   title={welcomeConfig.title}
@@ -65,7 +65,7 @@ export default function ModernChatContainer({
                   showIcon={welcomeConfig.showIcon}
                 />
               </div>
-            )}
+            )} */}
             {/* 추천 콘텐츠 */}
             {showRecommendedContent && recommendedConfig && (
               <RecommendedContent
@@ -96,9 +96,9 @@ export default function ModernChatContainer({
     // IDLE 상태: 환영 메시지 + 추천 콘텐츠
     if (chatState === 'idle' || chatState === 'user_typing') {
       return (
-        <div className="overflow-y-auto overflow-x-hidden h-full scrollbar-hide">
+        <div className="overflow-y-auto overflow-x-hidden h-full">
           {/* 환영 섹션 - 전체 너비 */}
-          {showWelcomeMessage && welcomeConfig && (
+          {/* {showWelcomeMessage && welcomeConfig && (
             <div className="w-full pt-4 px-4 flex-shrink-0">
               <WelcomeSection
                 title={welcomeConfig.title}
@@ -106,10 +106,10 @@ export default function ModernChatContainer({
                 showIcon={welcomeConfig.showIcon}
               />
             </div>
-          )}
+          )} */}
 
           {/* 추천 콘텐츠 */}
-          <div className="flex flex-col gap-4 px-4 pb-4">
+          <div className="flex flex-col gap-4 px-3 p-3">
             {showRecommendedContent && recommendedConfig && (
               <RecommendedContent
                 title={recommendedConfig.title}
@@ -141,7 +141,7 @@ export default function ModernChatContainer({
 
   return (
     <div
-      className={`w-[700px] h-[100dvh] max-h-[820px] rounded-[8px] border-none border-[#CBD5E1] bg-white flex flex-col md:h-screen md:max-h-[820px] md:rounded-[8px] ${className}`}
+      className={`w-[1024px] h-screen max-h-[820px] rounded-[8px] border-none border-[#CBD5E1] bg-white flex flex-col md:h-screen md:max-h-[820px] md:rounded-[8px] ${className}`}
     >
       {/* 채팅 영역 */}
       <div className="flex-1 overflow-hidden">{renderChatArea()}</div>
