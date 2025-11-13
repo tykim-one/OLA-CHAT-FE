@@ -20,16 +20,15 @@ const DailyReportPage: React.FC = () => {
   const id = params?.id as string | undefined
 
   const { report, loading, error } = useDailyReportData({ id: id ?? '' })
-
+  
   const ReportPdfViewer = ({ reportData }: { reportData: DailyReportData }) => {
     return (
       <div className="w-full h-screen py-2 flex justify-center bg-transparent overflow-hidden rounded-lg items-center">
         <PDFViewer 
           width="721px" 
-          height="100%"
           showToolbar={false}
           
-          className="border-none bg-transparent w-[721px] h-screen overflow-hidden flex justify-center"
+          className="border-none bg-transparent w-[721px] h-screen overflow-hidden flex justify-center py-24"
        
         >
           <PdfDailyReportDocument report={reportData} />
@@ -96,7 +95,7 @@ const DailyReportPage: React.FC = () => {
       }
       pdfFileName={`${report.title}_${report.date.replace(/\./g, '')}.pdf`}
       pageClassName="bg-Grayscale-B50 font-pretendard"
-      contentClassName="h-full w-full"
+      contentClassName="h-full w-full bg-white/80"
       downloadButtonWrapperClassName="right-10"
     >
       <div className="mx-auto max-w-[1024px] w-full h-full">

@@ -145,7 +145,7 @@ const Header = () => {
             <button
               onClick={() => handleTabClick('/main')}
               className={`flex items-center justify-center gap-2.5 px-3 py-2 border-b ${
-                isActiveTab('/main')
+                isActiveTab('/main') || pathname.startsWith('/report')
                   ? 'border-b-2 border-blue-500'
                   : 'border-gray-200'
               } transition-colors`}

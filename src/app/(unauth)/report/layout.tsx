@@ -10,9 +10,16 @@ export default function ReportLayout({ children }: { children: React.ReactNode }
   const router = useRouter()
 
   // 현재 경로에 따라 활성화할 탭 결정
-  // /report로 시작하면 'create-report', 그 외는 'auto-report'
-  const activeTab = pathname?.startsWith('/report') ? 'create-report' : 'auto-report'
+  // /report/daily, /report/completed는 'auto-report', /report는 'create-report'
+  const getActiveTab = () => {
+    if (pathname?.startsWith('/report/daily')) return 'auto-report'
+    if (pathname?.startsWith('/report/completed')) return 'auto-report'
+    if (pathname.endsWith('/report')) return 'create-report'
+    return 'auto-report'
+  }
+  const activeTab = getActiveTab()
 
+  console.log(activeTab)
   // 탭 변경 핸들러
   const handleTabChange = (value: string) => {
     if (value === 'auto-report') {
