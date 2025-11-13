@@ -1,4 +1,5 @@
 
+import { AppProvider } from '@/providers';
 import './globals.css'
 import { Viewport } from 'next'
 
@@ -22,9 +23,9 @@ export default function RootLayout({
         <meta name="description" content="OLA Suite" />
       </head>
       <body className="font-pretendard antialiased bg-current">
-           
+      <AppProvider>
           <main>{children}</main>
-        
+          </AppProvider>
       </body>
     </html>
   )

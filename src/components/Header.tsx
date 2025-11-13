@@ -92,7 +92,7 @@ const Header = () => {
               // 데모 신청 기능 추가 가능
               console.log('데모 신청하기 클릭')
             }}
-            className="flex items-center justify-center gap-2 px-3 py-2 bg-white border border-gray-300 rounded-lg w-[120px] hover:bg-gray-50 transition-colors"
+            className="flex items-center justify-center gap-2 px-3 py-2 bg-white border border-gray-300 rounded-lg w-fit hover:bg-gray-50 transition-colors"
             aria-label="데모 신청하기"
           >
             <MessageCircleHeartIcon className="w-4 h-4 text-gray-900" />
@@ -107,7 +107,7 @@ const Header = () => {
               // 서비스 소개서 다운로드 기능 추가 가능
               console.log('서비스 소개서 클릭')
             }}
-            className="flex items-center justify-center gap-2 px-3 py-2 bg-white border border-gray-300 rounded-lg w-[120px] hover:bg-gray-50 transition-colors"
+            className="flex items-center justify-center gap-2 px-3 py-2 bg-white border border-gray-300 rounded-lg w-fit hover:bg-gray-50 transition-colors"
             aria-label="서비스 소개서 다운로드"
           >
             <Download className="w-4 h-4 text-gray-900" />

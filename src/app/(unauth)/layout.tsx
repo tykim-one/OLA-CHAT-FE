@@ -12,7 +12,7 @@ export default function ServiceLayout({
             <Header />
             
             {/* 메인 콘텐츠 영역 */}
-            <div className="relative flex flex-1 items-center justify-center px-4 py-2">
+            <div className="relative flex flex-1 justify-center px-4 py-2">
                 {/* 배경 이미지 */}
                 <Image
                     fill

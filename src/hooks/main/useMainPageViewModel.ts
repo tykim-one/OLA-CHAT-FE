@@ -18,7 +18,7 @@ export const useMainPageViewModel = (): MainPageViewModel => {
       const token = localStorage.getItem('auth_token')
 
       if (!token) {
-        console.error('No auth token found')
+        // console.error('No auth token found')
         setLoading(false)
         return
       }

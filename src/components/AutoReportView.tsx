@@ -46,7 +46,7 @@ const ReportTabContent: React.FC<{
   return (
     <>
       <div className="min-h-[576px] max-h-[576px] mb-6 overflow-y-hidden">
-        <div className="space-y-3">
+        <div className="space-y-1">
           {reports.map((report) => (
             <ReportItem key={report.id} report={report} onClick={() => onReportClick(report)} />
           ))}
@@ -228,11 +228,11 @@ const AutoReportView: React.FC<AutoReportViewProps> = ({ className }) => {
   return (
     <div className={className}>
       {/* 뒤로가기 버튼과 제목 */}
-      <div className="mb-6 flex flex-col gap-1.5">
-        <div>
+      <div className="flex items-center gap-1.5 border-b border-gray-300 pb-3">
+        <div className="flex items-center gap-1.5">
           <button
             onClick={goBackToStep1}
-            className="h-9 px-3 py-2 cursor-pointer bg-white border border-gray-300 rounded-lg shadow-sm flex items-center gap-2 hover:bg-gray-50 transition-colors"
+            className="h-9 px-3 py-2 cursor-pointer rounded-lg flex items-center gap-2 hover:bg-gray-50"
           >
             <svg
               width="16"
@@ -249,21 +249,17 @@ const AutoReportView: React.FC<AutoReportViewProps> = ({ className }) => {
                 strokeLinejoin="round"
               />
             </svg>
-            <span className="text-sm font-medium text-gray-900">이전 화면</span>
+            
+            {/* <span className="text-sm font-medium text-gray-900">이전 화면</span> */}
           </button>
+          <h1 className="text-lg font-bold text-blue-500 leading-7">{currentReportConfig?.label}</h1>
         </div>
-
-        <h1 className="text-lg font-bold text-gray-900 leading-7">{currentReportConfig?.label}</h1>
-
-        <p className="text-sm text-gray-600 leading-5">
-          {getReportDescription(selectedReportType)}
-        </p>
       </div>
 
       {/* 탭 (showTabs가 true일 때만 표시) */}
       {showTabs ? (
         <Tabs defaultValue={currentTab} className="w-full">
-          <TabsList className="w-full bg-transparent rounded-none border-none">
+          {/* <TabsList className="w-full bg-transparent rounded-none border-none">
             {availableTabs.map((tab) => (
               <TabsTrigger
                 key={tab}
@@ -277,7 +273,7 @@ const AutoReportView: React.FC<AutoReportViewProps> = ({ className }) => {
                 {getTabLabel(tab)}
               </TabsTrigger>
             ))}
-          </TabsList>
+          </TabsList> */}
 
           {availableTabs.map((tab) => {
             const data = tabData[tab]

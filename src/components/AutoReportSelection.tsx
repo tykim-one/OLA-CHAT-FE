@@ -91,24 +91,26 @@ const ReportTypeCard: React.FC<{
   return (
     <div
       onClick={onClick}
-      className={`group cursor-pointer rounded-xl border ${theme.border} ${theme.hover} transition-all duration-200 hover:shadow-md bg-white`}
-      style={{ width: '239px', height: '200px' }}
+      className={`group cursor-pointer rounded-xl border ${theme.border} ${theme.hover} transition-all duration-200 hover:shadow-md bg-white w-full h-[200px] md:h-[224px]`}
     >
-      <div className="flex flex-col items-center justify-center h-full px-3 py-8 space-y-2">
+      <div className="flex flex-col items-center justify-center h-full py-8 gap-2">
         {/* Icon Badge */}
-        <div className={`${theme.badgeBg} rounded-lg p-4 flex items-center justify-center`} style={{ width: '56px', height: '56px' }}>
+        <div 
+          className={`${theme.badgeBg} rounded-lg flex items-center justify-center shrink-0`} 
+          style={{ width: '56px', height: '56px', padding: '16px' }}
+        >
           {getCardIcon(reportType.value)}
         </div>
 
         {/* Title */}
-        <h3 className="text-2xl font-bold text-black text-center leading-8">
+        <span className="text-base font-bold text-slate-900 text-center leading-6">
           {reportType.label}
-        </h3>
+        </span>
 
         {/* Last Updated */}
-        <div className="flex flex-col items-center space-y-1">
-          <span className="text-sm text-slate-500">마지막 생성:</span>
-          <span className="text-sm text-slate-800">
+        <div className="flex flex-col items-center gap-0">
+          <span className="text-sm leading-5 text-slate-500">마지막 생성:</span>
+          <span className="text-sm leading-5 text-slate-800">
             {reportType.lastUpdatedAt}
           </span>
         </div>
@@ -125,14 +127,14 @@ const AutoReportSelection: React.FC<AutoReportSelectionProps> = ({
   return (
     <div className={cn(className, 'min-h-[200px]')}>
       {/* 제목 및 설명 */}
-      <div className="mb-8 flex flex-col gap-2">
-        <span className="text-blue-500 text-base font-bold leading-6">
+      <div className="mb-3 border-b border-gray-300 pb-4 px-3">
+        <span className="text-blue-500 text-base font-extrabold leading-6">
           자동 리포트 보기
         </span>
       </div>
 
-      {/* 리포트 종류 선택 카드들 */}
-      <div className="flex gap-3 flex-wrap">
+      {/* 리포트 종류 선택 카드들 - 데스크탑 4열, 모바일 2열 그리드 */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 px-3">
         {reportTypeOptions.map((reportType) => (
           <ReportTypeCard
             key={reportType.value}

@@ -65,7 +65,7 @@ const ReportBadge: React.FC<ReportBadgeProps> = ({ category, className }) => {
   return (
     <div
       className={cn(
-        'inline-flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-semibold w-[53px] h-5 justify-center',
+        'inline-flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-semibold w-fit h-5 justify-center',
         config.bgColor,
         className,
       )}
