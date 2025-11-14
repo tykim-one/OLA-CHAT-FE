@@ -44,22 +44,22 @@ export const sourceTypeLabels = {
 
 // 카테고리 매핑
 export const categoryMap = {
-  market_summary: '시장 전망 요약',
-  global_economy: '글로벌 경제',
-  global_bond: '글로벌 채권',
-  domestic_stock: '국내 증시',
-  domestic_bond: '국내 채권',
-  portfolio_recommendation: '시황 관련 상품',
+  market_summary: '시장 전망 브리핑',
+  global_economy: '세계 경제 동향',
+  global_bond: '해외 채권 동향',
+  domestic_stock: '국내 증시 동향',
+  domestic_bond: '국내 채권 동향',
+  portfolio_recommendation: '추천 투자 포트폴리오',
 } as const
 
 // 필수 분석 옵션
 export const requiredAnalysisOptions = [
-  { value: 'market_summary', label: '시장 전망 요약' },
-  { value: 'global_economy', label: '글로벌 경제' },
-  { value: 'global_bond', label: '글로벌 채권' },
-  { value: 'domestic_stock', label: '국내 증시' },
-  { value: 'domestic_bond', label: '국내 채권' },
-  { value: 'portfolio_recommendation', label: '시황 관련 상품' },
+  { value: 'market_summary', label: '시장 전망 브리핑' },
+  { value: 'global_economy', label: '세계 경제 동향' },
+  { value: 'global_bond', label: '해외 채권 동향' },
+  { value: 'domestic_stock', label: '국내 증시 동향' },
+  { value: 'domestic_bond', label: '국내 채권 동향' },
+  { value: 'portfolio_recommendation', label: '추천 투자 포트폴리오' },
 ]
 
 // 추가 분석 옵션

@@ -2,21 +2,21 @@
 // import { Step } from '@/components/shared/StepSidebar'
 
 export const imageMapping: Record<string, string> = {
-  '시장 전망 요약': '/image.png',
-  '글로벌 경제': '/image-1.png',
-  '글로벌 채권': '/image-2.png',
-  '국내 증시': '/image-3.png',
-  '국내 채권': '/image-4.png',
-  '시황 관련 상품': '/image-5.png',
+  '시장 전망 브리핑': '/image.png',
+  '세계 경제 동향': '/image-1.png',
+  '해외 채권 동향': '/image-2.png',
+  '국내 증시 동향': '/image-3.png',
+  '국내 채권 동향': '/image-4.png',
+  '추천 투자 포트폴리오': '/image-5.png',
 }
 
 export const categoryMap: Record<string, string> = {
-  market_summary: '시장 전망 요약',
-  global_economy: '글로벌 경제',
-  global_bond: '글로벌 채권',
-  domestic_stock: '국내 증시',
-  domestic_bond: '국내 채권',
-  portfolio_recommendation: '시황 관련 상품',
+  market_summary: '시장 전망 브리핑',
+  global_economy: '세계 경제 동향',
+  global_bond: '해외 채권 동향',
+  domestic_stock: '국내 증시 동향',
+  domestic_bond: '국내 채권 동향',
+  portfolio_recommendation: '추천 투자 포트폴리오',
 }
 
 export const periodImageMap: Record<string, string> = {

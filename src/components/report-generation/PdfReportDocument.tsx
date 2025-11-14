@@ -60,9 +60,9 @@ const styles = StyleSheet.create({
     maxHeight: pxToPt(700),
   },
   border: {
-    borderStyle: 'solid',
-    borderColor: '#d1d5db',
-    borderWidth: pxToPt(1),
+    // borderStyle: 'solid',
+    // borderColor: '#d1d5db',
+    // borderWidth: pxToPt(1),
     maxWidth: pxToPt(992),
     maxHeight: pxToPt(700),
     alignSelf: 'center',
@@ -73,13 +73,35 @@ const styles = StyleSheet.create({
     paddingHorizontal: pxToPt(38),
   },
   headerContainer: {
+    position: 'relative',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    overflow: 'hidden',
+    padding: pxToPt(10),
+    borderRadius: pxToPt(10),
   },
+  
+  // 헤더 배경 이미지
+  headerBackgroundImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  },
+  
+  // 헤더 콘텐츠 (배경 위에 표시)
+  headerContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  
   headerImage: {
-    width: pxToPt(46),
-    height: pxToPt(46),
+    width: pxToPt(26),
+    height: pxToPt(26),
     marginRight: pxToPt(8),
   },
   headerBorderImage: {
@@ -167,12 +189,12 @@ const styles = StyleSheet.create({
 })
 
 const imageMapping: Record<string, string> = {
-  '시장 전망 요약': '/image.png',
-  '글로벌 경제': '/image-1.png',
-  '글로벌 채권': '/image-2.png',
-  '국내 증시': '/image-3.png',
-  '국내 채권': '/image-4.png',
-  '시황 관련 상품': '/image-5.png',
+  '시장 전망 브리핑': '/image.png',
+  '세계 경제 동향': '/image-1.png',
+  '해외 채권 동향': '/image-2.png',
+  '국내 증시 동향': '/image-3.png',
+  '국내 채권 동향': '/image-4.png',
+  '추천 투자 포트폴리오': '/image-5.png',
 }
 
 const periodImageMap: Record<string, string> = {
@@ -207,41 +229,20 @@ const renderPortfolioPage = (pageNumber: number, portfolioData: PortfolioData) =
 
   return (
     <Page key="portfolio" size="A4" orientation="landscape" style={styles.page}>
-      <Image src="/header-b-border.png" style={styles.headerBorderImage} />
+      
       <View style={styles.border}>
         {/* 헤더 */}
         <View style={styles.headerContainer}>
-          <View style={styles.leftGroup}>
-            <Image src="/image-5.png" style={styles.headerImage} />
-            <Text style={styles.header}>시황 관련 상품</Text>
-          </View>
-          <View style={styles.rightGroup}>
-            <View
-              style={{
-                border: '2px solid #ff0000',
-                borderRadius: pxToPt(8),
-                padding: pxToPt(6),
-                minWidth: pxToPt(60),
-                minHeight: pxToPt(32),
-                alignItems: 'center',
-                justifyContent: 'center',
-                display: 'flex',
-              }}
-            >
-              <Text
-                style={{
-                  color: '#ff0000',
-                  fontWeight: 700,
-                  fontFamily: 'Pretendard-Bold',
-                  fontSize: pxToPt(12),
-                  textAlign: 'center',
-                }}
-              >
-                행 내 한
-              </Text>
+          {/* 배경 이미지 (선택사항) */}
+          <Image src="/reportHeader.png" style={styles.headerBackgroundImage} />
+          
+          {/* 헤더 콘텐츠 */}
+          <View style={styles.headerContent}>
+            <View style={styles.leftGroup}>
+              <Image src="/image-5.png" style={styles.headerImage} />
+              <Text style={styles.header}>시황 관련 상품</Text>
             </View>
-            <Image src="/hows.png" style={styles.howsImage} />
-          </View>
+            </View>
         </View>
         <View style={styles.separator} />
 
@@ -641,36 +642,15 @@ export const PdfReportDocument = ({ data, portfolioData, reportMeta }: PdfReport
               {/* header */}
 
               <View style={styles.headerContainer}>
-                <View style={styles.leftGroup}>
-                  <Image src={imageMapping[r.headerTitle]} style={styles.headerImage} />
-                  <Text style={styles.header}>{r.headerTitle}</Text>
-                </View>
-                <View style={styles.rightGroup}>
-                  <View
-                    style={{
-                      border: '2px solid #ff0000',
-                      borderRadius: pxToPt(8),
-                      padding: pxToPt(6),
-                      minWidth: pxToPt(60),
-                      minHeight: pxToPt(32),
-                      alignItems: 'center', // 가로 중앙
-                      justifyContent: 'center', // 세로 중앙
-                      display: 'flex', // 혹시 필요하면 추가
-                    }}
-                  >
-                    <Text
-                      style={{
-                        color: '#ff0000',
-                        fontWeight: 700,
-                        fontFamily: 'Pretendard-Bold',
-                        fontSize: pxToPt(12),
-                        textAlign: 'center', // 텍스트 중앙
-                      }}
-                    >
-                      행 내 한
-                    </Text>
+                {/* 배경 이미지 */}
+                <Image src="/reportHeader.png" style={styles.headerBackgroundImage} />
+                
+                {/* 헤더 콘텐츠 */}
+                <View style={styles.headerContent}>
+                  <View style={styles.leftGroup}>
+                    <Image src={imageMapping[r.headerTitle]} style={styles.headerImage} />
+                    <Text style={styles.header}>{r.headerTitle}</Text>
                   </View>
-                  <Image src="/hows.png" style={styles.howsImage} />
                 </View>
               </View>
               <View style={styles.separator} />
