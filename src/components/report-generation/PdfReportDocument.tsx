@@ -519,6 +519,7 @@ const renderPortfolioPage = (pageNumber: number, portfolioData: PortfolioData) =
 const renderCoverPage = (reportMeta: ReportMeta) => {
   const coverImage = periodImageMap[reportMeta.period]
 
+  console.log(coverImage)
   const today = new Date()
     .toLocaleDateString('ko-KR', {
       year: 'numeric',

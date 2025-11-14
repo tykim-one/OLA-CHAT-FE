@@ -1,10 +1,10 @@
 import Image from 'next/image'
 
-import { Components } from '@ola-b2b/ui'
 
 import type { PerformanceRow, RecommendedProducts } from '@/types/report'
 
 import { CompletedReportHeader } from './CompletedReportHeader'
+import { Separator } from '../ui/separator'
 
 interface PortfolioRecommendationContainerProps {
   recommended_products: RecommendedProducts
@@ -27,7 +27,7 @@ export const PortfolioRecommendationContainer = ({
   return (
     <div className="bg-white relative mb-[50px] px-[38px] pb-[44px] pt-[24px] flex flex-col gap-3 border border-grayscale-b100 max-w-[992px] max-h-[700px] w-full h-full justify-self-center">
       <CompletedReportHeader title="시황 관련 상품" imageSrc={imageSrc} />
-      <Components.Separator className="h-[1px] bg-slate-200" />
+      <Separator className="h-[1px] bg-slate-200" />
 
       <div className="max-h-[275px] h-full space-y-3 mb-7 z-10">
         <h2 className="self-stretch justify-center text-slate-900 text-xl font-semibold leading-7">

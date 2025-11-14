@@ -14,7 +14,7 @@ export default function ReportLayout({ children }: { children: React.ReactNode }
   const getActiveTab = () => {
     if (pathname?.startsWith('/report/daily')) return 'auto-report'
     if (pathname?.startsWith('/report/completed')) return 'auto-report'
-    if (pathname.endsWith('/report')) return 'create-report'
+    if (pathname?.endsWith('/report')) return 'create-report'
     return 'auto-report'
   }
   const activeTab = getActiveTab()
@@ -47,6 +47,13 @@ export default function ReportLayout({ children }: { children: React.ReactNode }
 
             <TabsContent
               value="create-report"
+              className="bg-transparent rounded-xl shadow-[0px_-2px_40px_0px_rgba(223,235,255,0.15)] mt-0 min-h-[272px]"
+            >
+              {children}
+            </TabsContent>
+
+            <TabsContent
+              value="auto-report"
               className="bg-transparent rounded-xl shadow-[0px_-2px_40px_0px_rgba(223,235,255,0.15)] mt-0 min-h-[272px]"
             >
               {children}

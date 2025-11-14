@@ -15,27 +15,28 @@ import { PDFViewer } from '@react-pdf/renderer'
 const loadingDescription = '데일리 리포트를 불러오는 중입니다. 잠시만 기다려주세요.'
 const errorDescription = '리포트를 불러오는 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.'
 
+export const ReportPdfViewer = ({ reportData }: { reportData: DailyReportData }) => {
+  return (
+    <div className="w-full h-screen py-2 flex justify-center bg-transparent overflow-hidden rounded-lg items-center">
+      <PDFViewer 
+        width="721px" 
+        showToolbar={false}
+        
+        className="border-none bg-transparent w-[721px] md:h-screen h-[570px] overflow-hidden flex justify-center md:py-24 py-4"
+     
+      >
+        <PdfDailyReportDocument report={reportData} />
+      </PDFViewer>
+    </div>
+  );
+};
+
 const DailyReportPage: React.FC = () => {
   const params = useParams()
   const id = params?.id as string | undefined
 
   const { report, loading, error } = useDailyReportData({ id: id ?? '' })
   
-  const ReportPdfViewer = ({ reportData }: { reportData: DailyReportData }) => {
-    return (
-      <div className="w-full h-screen py-2 flex justify-center bg-transparent overflow-hidden rounded-lg items-center">
-        <PDFViewer 
-          width="721px" 
-          showToolbar={false}
-          
-          className="border-none bg-transparent w-[721px] h-screen overflow-hidden flex justify-center py-24"
-       
-        >
-          <PdfDailyReportDocument report={reportData} />
-        </PDFViewer>
-      </div>
-    );
-  };
   
   if (!id) {
     return (

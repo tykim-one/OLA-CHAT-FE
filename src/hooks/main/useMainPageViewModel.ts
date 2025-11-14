@@ -26,7 +26,8 @@ export const useMainPageViewModel = (): MainPageViewModel => {
       const response = await fetch(`${process.env.NEXT_PUBLIC_IBK_PUBLIC_URL}/ibk/content-meta`, {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          // Authorization: `Bearer ${token}`,
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpYmtfdGVzdCIsImlkIjoxNiwiZXhwIjoxNzYzMTcxNjAwfQ.7i5expXZUKUoDqK8olW74p7CcyXUfvT1kAsTj2HcRfU`,
         },
       })
 

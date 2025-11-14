@@ -46,17 +46,14 @@ const styles = StyleSheet.create({
     width: '100%',
     height: pxToPt(84),
     marginBottom: pxToPt(24),
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   headerContainer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: pxToPt(24),
+    justifyContent: 'center',
+    
   },
   headerBgImage: {
     position: 'absolute',
@@ -95,9 +92,9 @@ const styles = StyleSheet.create({
   },
   header: {
     fontFamily: 'PretendardJP-Bold',
-    fontSize: pxToPt(30),
+    fontSize: pxToPt(24),
     fontWeight: 700,
-    color: '#ffffff',
+    color: '#43477B',
   },
   separator: {
     height: pxToPt(1),
@@ -115,15 +112,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: pxToPt(36),
     paddingBottom: pxToPt(32),
   },
-  sectionTitle: {
-    fontFamily: 'PretendardJP-Bold',
-    fontSize: pxToPt(24),
-    fontWeight: 700,
-    color: '#075985',
-    marginBottom: pxToPt(12),
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
+  // sectionTitle: {
+  //   fontFamily: 'PretendardJP-Bold',
+  //   fontSize: pxToPt(24),
+  //   fontWeight: 700,
+  //   color: '#075985',
+  //   marginBottom: pxToPt(12),
+  //   flexDirection: 'row',
+  //   alignItems: 'center',
+  // },
   titleBar: {
     width: pxToPt(6),
     height: pxToPt(36),
@@ -311,6 +308,23 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     textAlign: 'center',
   },
+  sectionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: pxToPt(8),
+    padding: pxToPt(6),
+    borderRadius: pxToPt(10),
+    borderWidth: 1,
+    borderColor: '#F1F5F9',
+    backgroundColor: '#e7efff',
+    // background: 'linear-gradient(90deg, #F8FAFC 0%, #E7EFFF 100%)',
+  },
+  sectionTitle: {
+    fontFamily: 'Pretendard-Bold',
+    fontSize: pxToPt(20),
+    color: '#003F88',
+  },
 })
 
 const getThemeConfig = (theme: string) => {
@@ -413,6 +427,7 @@ export const PdfDailyReportDocument = ({ report }: PdfDailyReportDocumentProps) 
   const tableRowChunks = getTableRowChunks(report.tableData?.rows ?? [])
   const tableRowChunkPairs = chunkArray(tableRowChunks, 2)
 
+  console.log(report)
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -421,42 +436,29 @@ export const PdfDailyReportDocument = ({ report }: PdfDailyReportDocumentProps) 
 
           <View style={styles.headerContainer}>
             <View style={styles.leftGroup}>
-              <Image src="/hows.png" style={styles.howsImage} />
-              <View>
+              
+              <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                <Image src="/oneline-logo.png" style={{width: pxToPt(102), height: pxToPt(20)}} />
                 <Text style={styles.header}>
-                  IBK 자산관리 How's:{' '}
-                  {themeConfig.highlightWord && report.title.includes(themeConfig.highlightWord) ? (
-                    <>
-                      {report.title.split(themeConfig.highlightWord).map((part, index) => (
-                        <Text key={index}>
-                          {part}
-                          {index < report.title.split(themeConfig.highlightWord).length - 1 && (
-                            <Text style={{ color: '#FFD900' }}>{themeConfig.highlightWord}</Text>
-                          )}
-                        </Text>
-                      ))}
-                    </>
-                  ) : (
-                    report.title
-                  )}
+                  OLA {' '}
+                  
+                    {report.title}
+                  
                 </Text>
                 <Text
                   style={{
                     fontFamily: 'PretendardJP-Regular',
-                    fontSize: pxToPt(14),
-                    color: '#ffffff',
+                    fontSize: pxToPt(12),
+                    color: '#64748B',
                     marginTop: pxToPt(2),
                   }}
                 >
-                  자산관리사업부 작성일: {report.date}
+                  {report.date}
                 </Text>
               </View>
             </View>
-            <View style={styles.badgeWrapper}>
-              <Text style={styles.badgeText}>행 내 한</Text>
-            </View>
+
           </View>
-          <Image src="/header-b-border.png" style={styles.headerBorderImage} />
         </View>
 
         {/* <View style={styles.border}> */}
@@ -467,9 +469,10 @@ export const PdfDailyReportDocument = ({ report }: PdfDailyReportDocumentProps) 
         <View style={styles.contentWrapper}>
           {/* 뉴스 섹션 */}
           <View style={styles.sectionBlock} wrap={false}>
+            <View style={styles.sectionHeader}>
             <View style={styles.sectionTitle}>
-              <View style={styles.titleBar} />
               <Text>{themeConfig.newsTitle}</Text>
+            </View>
             </View>
 
             <View style={styles.newsList}>
@@ -536,9 +539,10 @@ export const PdfDailyReportDocument = ({ report }: PdfDailyReportDocumentProps) 
           {/* 차트 이미지 섹션 */}
           {/* 분석 섹션 */}
           <View style={styles.sectionBlock}>
+            <View style={styles.sectionHeader}>
             <View style={styles.sectionTitle}>
-              <View style={styles.titleBar} />
-              <Text>{themeConfig.analysisTitle}</Text>
+                <Text>{themeConfig.analysisTitle}</Text>
+              </View>
             </View>
 
             <View style={{ gap: pxToPt(4), minHeight: pxToPt(112) }}>
@@ -611,9 +615,10 @@ export const PdfDailyReportDocument = ({ report }: PdfDailyReportDocumentProps) 
 
           {/* 테이블 섹션 */}
           <View style={styles.sectionBlock} wrap={false}>
-            <View style={styles.sectionTitle}>
-              <View style={styles.titleBar} />
+            <View style={styles.sectionHeader}>
+              <View style={styles.sectionTitle}>
               <Text>{themeConfig.tableTitle}</Text>
+            </View>
             </View>
 
             <View style={styles.tableContainer}>

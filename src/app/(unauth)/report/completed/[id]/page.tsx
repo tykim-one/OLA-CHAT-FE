@@ -8,8 +8,9 @@ import { PortfolioRecommendationContainer } from '@/components/report/PortfolioR
 import { ReportCoverImage } from '@/components/report/ReportCoverImage'
 import BreadCrumb from '@/components/shared/BreadCrumb'
 import Header from '@/components/shared/Header'
-
+import { PDFViewer } from '@react-pdf/renderer'
 import { useReportData } from '@/hooks/useReportData'
+import { PdfReportDocument } from '@/components/report-generation/PdfReportDocument'
 
 export default function MainReportPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = React.use(params)
@@ -46,8 +47,17 @@ export default function MainReportPage({ params }: { params: Promise<{ id: strin
     period: report[0]?.period || 'daily',
   }
 
+  console.log(reportMeta)
+
+  const ReportPDFViewer = ({ data, portfolioData, reportMeta }: { data: any, portfolioData: any, reportMeta: any }) => {
+    return (
+      <PDFViewer width="100%" showToolbar={false} className="border-none bg-transparent w-full md:h-[5040px] h-[1650px] flex justify-center py-0">
+        <PdfReportDocument data={data} portfolioData={{ recommendedProducts, performanceRows }} reportMeta={reportMeta} />
+      </PDFViewer>
+    )
+  }
   return (
-    <div className="h-screen bg-Grayscale-B50 font-pretendard overflow-y-scroll">
+    <div className="h-full bg-Grayscale-B50 font-pretendard">
       <Header
         pdfButton={
           <ReportPdfDownload
@@ -58,8 +68,8 @@ export default function MainReportPage({ params }: { params: Promise<{ id: strin
           />
         }
       />
-      <div className="w-full h-full px-10 py-5">
-        <BreadCrumb showHome={true} className="mb-5" customTitle={reportMeta.title} />
+      <div className="w-full h-full">
+        {/* <BreadCrumb showHome={true} className="mb-5" customTitle={reportMeta.title} />
 
         <ReportCoverImage reportMeta={reportMeta} />
 
@@ -80,7 +90,8 @@ export default function MainReportPage({ params }: { params: Promise<{ id: strin
             performance_rows={performanceRows}
             pageNumber={Object.keys(marketSummary).length + 1}
           />
-        )}
+        )} */}
+        <ReportPDFViewer data={marketSummary} portfolioData={{ recommendedProducts, performanceRows }} reportMeta={reportMeta} />
       </div>
     </div>
   )

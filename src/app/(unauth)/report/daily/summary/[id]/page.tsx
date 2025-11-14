@@ -4,23 +4,30 @@ import { useParams } from 'next/navigation'
 import React from 'react'
 
 import { FileDown } from 'lucide-react'
+import { PDFViewer } from '@react-pdf/renderer'
 
-import {
-  AiInsightsSection,
-  CommodityPricesSection,
-  ExchangeRatesSection,
-  GlobalIndicesSection,
-  KeywordsSection,
-  MarketTrendsSection,
-  NewsSection,
-  NoticeSection,
-  ReportHeader,
-} from '@/components/daily-summary'
 import { PdfDailySummaryDocument } from '@/components/report-generation/PdfDailySummaryDocument'
 import { ReportPageLayout, ReportStatusMessage } from '@/components/report/shared'
 import Header from '@/components/shared/Header'
 
 import { useGetDailySummaryQuery } from '@/hooks/data-fetching/daily'
+import { DailySummaryData } from '@/types/dailySummary'
+
+// DailySummary PDF 뷰어 컴포넌트
+export const DailySummaryPdfViewer = ({ data }: { data: DailySummaryData }) => {
+  return (
+    <div className="w-full py-2 flex justify-center bg-transparent overflow-hidden rounded-lg items-center">
+      <PDFViewer 
+        width="721px" 
+        showToolbar={false}
+        className="border-none bg-transparent w-[721px] md:h-[3250px] h-[1400px] flex justify-center md:py-24 py-0"
+        
+      >
+        <PdfDailySummaryDocument data={data} />
+      </PDFViewer>
+    </div>
+  )
+}
 
 const DailySummaryPage: React.FC = () => {
   const params = useParams()
@@ -37,7 +44,6 @@ const DailySummaryPage: React.FC = () => {
     if (!data) {
       return null
     }
-
     return <PdfDailySummaryDocument data={data} />
   }, [data])
 
@@ -48,10 +54,6 @@ const DailySummaryPage: React.FC = () => {
 
     return `일간 리포트 ${data.aiReportInfo.generatedAt}.pdf`
   }, [data])
-
-  const handleNewsLinkClick = React.useCallback((link: string) => {
-    window.open(link, '_blank', 'noopener,noreferrer')
-  }, [])
 
   const handleRetryClick = React.useCallback(() => {
     refetch()
@@ -105,36 +107,14 @@ const DailySummaryPage: React.FC = () => {
       pdfDocument={pdfDocument}
       pdfFileName={downloadFileName}
       pageClassName="bg-gray-50"
-      contentClassName="px-8 pt-8 pb-20"
+      contentClassName="pt-8 pb-20"
       downloadButtonWrapperClassName="right-10"
       downloadButtonProps={{
         icon: <FileDown className="h-4 w-4 text-white" aria-hidden="true" />,
       }}
     >
-      <div className="mx-auto w-full max-w-[721px] rounded-lg bg-white shadow-sm">
-        <div className="flex flex-col gap-6 pb-7">
-          <div className="flex items-start justify-between">
-            <div className="w-full flex-1">
-              <ReportHeader title={data.title} aiReportInfo={data.aiReportInfo} />
-            </div>
-          </div>
-
-          <KeywordsSection keywords={data.marketKeywords} />
-
-          <NewsSection news={data.topNews} onLinkClick={handleNewsLinkClick} />
-
-          <MarketTrendsSection marketTrends={data.marketTrends} />
-
-          <GlobalIndicesSection indices={data.globalIndices} />
-
-          <ExchangeRatesSection exchangeRates={data.exchangeRates} />
-
-          <CommodityPricesSection commodityPrices={data.commodityPrices} />
-
-          <AiInsightsSection insights={data.aiInsights} />
-
-          <NoticeSection />
-        </div>
+      <div className="mx-auto max-w-[1024px] w-full h-full">
+        <DailySummaryPdfViewer data={data} />
       </div>
       {(isLoading || isFetching) && (
         <div className="mt-6 text-center text-sm font-medium text-slate-500" aria-live="polite">

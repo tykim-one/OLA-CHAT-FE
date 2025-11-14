@@ -33,31 +33,44 @@ const styles = StyleSheet.create({
   },
   // 섹션 간격
   sectionMargin: {
-    marginBottom: pxToPt(24),
+    // marginBottom: pxToPt(24),
   },
 
-  // 메인 제목 헤더
+  // 메인 제목 헤더 (배경 이미지 컨테이너)
   titleHeader: {
-    backgroundColor: '#EFF6FF',
-    borderRadius: pxToPt(12),
-    paddingVertical: pxToPt(20),
-    paddingHorizontal: pxToPt(20),
-    alignItems: 'center',
     height: pxToPt(112),
-    marginBottom: pxToPt(24),
     position: 'relative',
+    overflow: 'hidden', // borderRadius 적용을 위해
+  },
+
+  // 배경 이미지
+  titleHeaderBackground: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: pxToPt(84),
+  },
+
+  // 헤더 콘텐츠 (배경 위에 표시)
+  titleHeaderContent: {
+    // paddingVertical: pxToPt(20),
+    // paddingHorizontal: pxToPt(20),
+    alignItems: 'center',
+    height: pxToPt(84),
+    justifyContent: 'center',
   },
 
   headerLogo: {
-    width: pxToPt(87),
-    height: pxToPt(30),
+    width: pxToPt(95),
+    height: pxToPt(20),
     marginBottom: pxToPt(6),
   },
 
   mainTitle: {
     fontFamily: 'Pretendard-Bold',
-    fontSize: pxToPt(30),
-    color: '#004CA5',
+    fontSize: pxToPt(24),
+    color: '#43477B',
     textAlign: 'center',
   },
 
@@ -65,22 +78,28 @@ const styles = StyleSheet.create({
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
+    marginTop: pxToPt(24),
     marginBottom: pxToPt(8),
-    paddingLeft: pxToPt(4),
+    padding: pxToPt(6),
+    borderRadius: pxToPt(10),
+    borderWidth: 1,
+    borderColor: '#F1F5F9',
+    backgroundColor: '#e7efff',
+    // background: 'linear-gradient(90deg, #F8FAFC 0%, #E7EFFF 100%)',
   },
-
+  sectionTitle: {
+    fontFamily: 'Pretendard-Bold',
+    fontSize: pxToPt(20),
+    color: '#003F88',
+  },
   sectionIcon: {
     width: pxToPt(32),
     height: pxToPt(32),
     marginRight: pxToPt(10),
   },
 
-  sectionTitle: {
-    fontFamily: 'Pretendard-Bold',
-    fontSize: pxToPt(24),
-    color: '#000000',
-  },
+  
 
   // 카드 컨테이너
 
@@ -109,18 +128,22 @@ const styles = StyleSheet.create({
     borderColor: '#E2E8F0',
     borderRadius: pxToPt(12),
     padding: pxToPt(16),
-    marginBottom: pxToPt(24),
+    
+    
   },
 
   aiInfoRow: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
+    gap: pxToPt(6),
+    height: pxToPt(100),
+    justifyContent: 'center',
   },
 
   aiInfoText: {
-    fontFamily: 'Pretendard-Regular',
-    fontSize: pxToPt(16),
-    color: '#64748B',
+    fontFamily: 'Pretendard-Bold',
+    fontSize: pxToPt(18),
+    color: '#000000',
   },
 
   aiBadge: {
@@ -134,11 +157,11 @@ const styles = StyleSheet.create({
   },
 
   aiBadgePrimary: {
-    backgroundColor: '#155E75',
+    backgroundColor: '#3B82F6',
   },
 
   aiBadgeSecondary: {
-    backgroundColor: '#6B21A8',
+    backgroundColor: '#0EA5E9',
   },
 
   aiBadgeText: {
@@ -456,39 +479,38 @@ export const PdfDailySummaryDocument = ({ data }: PdfDailySummaryDocumentProps) 
         {/* 메인 제목 헤더 */}
 
         <View style={styles.titleHeader}>
-          {/* <Image src="/ibk.png" style={styles.headerLogo} /> */}
-          <Image src="/daily/header.png" style={styles.headerLogo} />
-          <Text style={styles.mainTitle}>일간 리포트</Text>
-          <View style={styles.badgeWrapper}>
-            <Text style={styles.badgeText}>행 내 한</Text>
+          {/* 배경 이미지 */}
+          <Image src="/title.png" style={styles.titleHeaderBackground} />
+          
+          {/* 헤더 콘텐츠 */}
+          <View style={styles.titleHeaderContent}>
+            <Image src="/logo.png" style={styles.headerLogo} />
+            <Text style={styles.mainTitle}>OLA 일간 리포트</Text>
+            <Text style={{ fontFamily: 'Pretendard-Regular', fontSize: pxToPt(12), color: '#64748B' }}>작성일: {data.aiReportInfo.generatedAt.slice(0, 10)}</Text>
           </View>
         </View>
         <View style={styles.container}>
           {/* Daily AI Report 섹션 */}
           <View style={styles.sectionHeader}>
-            <Image src="/icons/bot-icon.png" style={styles.sectionIcon} />
-            <Text style={styles.sectionTitle}>Daily AI Report</Text>
-          </View>
-
-          <View style={styles.aiInfoCard}>
-            <View style={styles.aiInfoRow}>
+          <View style={styles.aiInfoRow}>
               <Text style={styles.aiInfoText}>
-                자동 생성 시각 · {getGeneratedAtDisplay(data.aiReportInfo.generatedAt)}
+              신뢰할 수 있는 출처를 기반으로 AI가 매일 리포트를 만들어 드립니다.
               </Text>
+              <View style={{flexDirection: 'row', gap: pxToPt(10)}}>
               <View style={[styles.aiBadge, styles.aiBadgePrimary]}>
                 <Text style={styles.checkIcon}>✓</Text>
-                <Text style={styles.aiBadgeText}>검증 출처 63개</Text>
+                <Text style={styles.aiBadgeText}>검증된 데이터 소스 63개</Text>
               </View>
               <View style={[styles.aiBadge, styles.aiBadgeSecondary]}>
                 <Text style={styles.checkIcon}>✓</Text>
-                <Text style={styles.aiBadgeText}>생성 모델: GPT 5.0</Text>
+                <Text style={styles.aiBadgeText}>보고서 생성 엔진 GPT 5.0</Text>
+              </View>
               </View>
             </View>
           </View>
 
           {/* 오늘의 금융시장 키워드 */}
           <View style={styles.sectionHeader}>
-            <Image src="/icons/search-icon.png" style={styles.sectionIcon} />
             <Text style={styles.sectionTitle}>오늘의 금융시장 키워드</Text>
           </View>
 
@@ -555,7 +577,6 @@ export const PdfDailySummaryDocument = ({ data }: PdfDailySummaryDocumentProps) 
 
           {/* 주요 뉴스 10선 */}
           <View style={styles.sectionHeader}>
-            <Image src="/icons/newspaper-icon.png" style={styles.sectionIcon} />
             <Text style={styles.sectionTitle}>주요 뉴스 10선</Text>
           </View>
 
@@ -595,41 +616,11 @@ export const PdfDailySummaryDocument = ({ data }: PdfDailySummaryDocumentProps) 
       {/* 두 번째 페이지: 시장 추세, 글로벌 지수, 환율 */}
       <Page size="A4" style={styles.page}>
         {/* 시장 추세 그래프 */}
-        <View style={styles.sectionHeader}>
-          <Image src="/icons/chart-icon.png" style={styles.sectionIcon} />
-          <Text style={styles.sectionTitle}>시장 추세 그래프</Text>
-        </View>
-
-        <View style={styles.chartContainer}>
-          <View style={styles.chartCard}>
-            <View style={styles.chartHeader}>
-              <Text style={styles.chartLabel}>{data.marketTrends[0].date}</Text>
-              <Text style={styles.chartLabel}>일간장중</Text>
-              <Text style={styles.chartName}>KOSPI</Text>
-            </View>
-            <View style={styles.chartDivider} />
-            {data.marketTrends[0]?.imageUrl && (
-              <Image src={data.marketTrends[0].imageUrl} style={styles.chartImage} />
-            )}
-          </View>
-
-          <View style={[styles.chartCard, styles.chartCardRight]}>
-            <View style={styles.chartHeader}>
-              <Text style={styles.chartLabel}>{data.marketTrends[1].date}</Text>
-              <Text style={styles.chartLabel}>일간장중</Text>
-              <Text style={styles.chartName}>KOSDAQ</Text>
-            </View>
-            <View style={styles.chartDivider} />
-            {data.marketTrends[1]?.imageUrl && (
-              <Image src={data.marketTrends[1].imageUrl} style={styles.chartImage} />
-            )}
-          </View>
-        </View>
+        
 
         {/* 글로벌 지수 및 주요 시장 지표 */}
         <View style={styles.sectionHeader}>
-          <Image src="/icons/chart-bar-icon.png" style={styles.sectionIcon} />
-          <Text style={styles.sectionTitle}>글로벌 지수 및 주요 시장 지표</Text>
+          <Text style={styles.sectionTitle}>글로벌 지수와 핵심 시장 지표</Text>
         </View>
 
         <View style={styles.tableContainer}>
@@ -658,8 +649,7 @@ export const PdfDailySummaryDocument = ({ data }: PdfDailySummaryDocumentProps) 
 
         {/* 환율 및 채권 수익률 */}
         <View style={styles.sectionHeader}>
-          <Image src="/icons/percent-icon.png" style={styles.sectionIcon} />
-          <Text style={styles.sectionTitle}>환율 동향</Text>
+          <Text style={styles.sectionTitle}>주요 통화 환율 흐름</Text>
         </View>
 
         <View style={styles.tableContainer}>
@@ -716,15 +706,9 @@ export const PdfDailySummaryDocument = ({ data }: PdfDailySummaryDocumentProps) 
           ))}
         </View>
 
-        <Text style={styles.pageNumber}>02</Text>
-      </Page>
-
-      {/* 세 번째 페이지: 원자재, AI 인사이트, 유의사항 */}
-      <Page size="A4" style={styles.page}>
-        {/* 원자재 가격 */}
-        <View style={styles.sectionHeader}>
-          <Image src="/icons/coins-icon.png" style={styles.sectionIcon} />
-          <Text style={styles.sectionTitle}>원자재 가격</Text>
+{/* 원자재 가격 */}
+<View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>주요 원자재 시세</Text>
         </View>
 
         <View style={styles.tableContainer}>
@@ -781,10 +765,15 @@ export const PdfDailySummaryDocument = ({ data }: PdfDailySummaryDocumentProps) 
             </View>
           ))}
         </View>
+        <Text style={styles.pageNumber}>02</Text>
+      </Page>
+
+      {/* 세 번째 페이지: 원자재, AI 인사이트, 유의사항 */}
+      <Page size="A4" style={styles.page}>
+        
 
         {/* 주요 요약 및 AI 인사이트 */}
-        <View style={styles.sectionHeader}>
-          <Image src="/icons/message-icon.png" style={styles.sectionIcon} />
+        {/* <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>주요 요약 및 AI 인사이트</Text>
         </View>
 
@@ -844,24 +833,50 @@ export const PdfDailySummaryDocument = ({ data }: PdfDailySummaryDocumentProps) 
           ) : (
             <Text style={styles.aiInsightText}>데이터를 불러올 수 없습니다.</Text>
           )}
+        </View> */}
+
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>시장 추이 차트</Text>
+        </View>
+
+        <View style={styles.chartContainer}>
+          <View style={styles.chartCard}>
+            <View style={styles.chartHeader}>
+              <Text style={styles.chartLabel}>{data.marketTrends[0].date}</Text>
+              <Text style={styles.chartLabel}>일간장중</Text>
+              <Text style={styles.chartName}>KOSPI</Text>
+            </View>
+            <View style={styles.chartDivider} />
+            {data.marketTrends[0]?.imageUrl && (
+              <Image src={data.marketTrends[0].imageUrl} style={styles.chartImage} />
+            )}
+          </View>
+
+          <View style={[styles.chartCard, styles.chartCardRight]}>
+            <View style={styles.chartHeader}>
+              <Text style={styles.chartLabel}>{data.marketTrends[1].date}</Text>
+              <Text style={styles.chartLabel}>일간장중</Text>
+              <Text style={styles.chartName}>KOSDAQ</Text>
+            </View>
+            <View style={styles.chartDivider} />
+            {data.marketTrends[1]?.imageUrl && (
+              <Image src={data.marketTrends[1].imageUrl} style={styles.chartImage} />
+            )}
+          </View>
         </View>
 
         {/* 유의사항 */}
-        <View style={styles.noticeHeader}>
-          <View style={styles.noticeHeaderContent}>
-            <Image src="/icons/warning-icon.png" style={styles.sectionIcon} />
-            <Text style={styles.noticeTitleText}>유의 사항</Text>
-          </View>
+        <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>리포트 이용 안내</Text>
         </View>
 
         <View style={styles.card}>
           <Text style={styles.noticeText}>
-            • 본 자료는 경제와 금융시장 이해를 돕기 위한 정보 제공 목적의 자체 조사·분석 자료입니다.
-            {'\n'}• 본 자료는 AI가 생성한 자료입니다.{'\n'}• 투자 권유가 아니며 투자 판단의 최종
-            책임은 투자자 본인에게 있습니다.{'\n'}• 수집된 정보의 정확성과 완전성은 보장되지 않으며
-            사전 통지 없이 변경될 수 있습니다.{'\n'}• 본 자료와 포함된 저작물은 IBK기업은행의 사전
-            서면 동의 없이 무단 복제, 배포, 전송, 대여 등이 금지됩니다.
+            • 이 자료는 경제와 금융시장에 대한 이해를 돕기 위한 것으로, 정보 제공을 목적으로 한 원라인에이아이의 자체 조사·분석 결과입니다.
+            {'\n'}• 이 자료는 인공지능이 생성한 콘텐츠입니다.{'\n'}• 본 자료는 투자 권유가 아니며, 투자 판단과 그에 따른 최종 책임은 전적으로 투자자 본인에게 있습니다.{'\n'}• 수집된 정보의 정확성과 완전성은 보장되지 않으며
+            사전 고지 없이 변경되거나 수정될 수 있습니다.{'\n'}• 이 자료와 그 안에 포함된 모든 저작물은 원라인에이아이의 사전 서면 동의 없이 복제, 배포, 전송, 대여 등 어떤 형태로든 사용할 수 없습니다.
           </Text>
+          <Image src='/summary-info.png' style={{ width: '100%'}} />
         </View>
 
         <Text style={styles.pageNumber}>03</Text>

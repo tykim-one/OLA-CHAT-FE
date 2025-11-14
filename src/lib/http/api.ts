@@ -8,8 +8,10 @@ export const api = axios.create({
   timeout: 30000, // 30 seconds
 })
 
+const token = localStorage.getItem('auth_token')
 api.interceptors.request.use(
   (config) => {
+    config.headers.set('Authorization', `Bearer ${token}`)
     // No authentication for this client
     return config
   },
