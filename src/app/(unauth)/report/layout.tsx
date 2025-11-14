@@ -13,7 +13,7 @@ export default function ReportLayout({ children }: { children: React.ReactNode }
   // /report/daily, /report/completed는 'auto-report', /report는 'create-report'
   const getActiveTab = () => {
     if (pathname?.startsWith('/report/daily')) return 'auto-report'
-    if (pathname?.startsWith('/report/completed')) return 'auto-report'
+    if (pathname?.startsWith('/report/completed')) return 'create-report'
     if (pathname?.endsWith('/report')) return 'create-report'
     return 'auto-report'
   }
@@ -27,7 +27,7 @@ export default function ReportLayout({ children }: { children: React.ReactNode }
       router.push('/main?tab=auto-report')
     } else if (value === 'create-report') {
       // 수동 리포트 생성 탭 클릭 시 report 페이지로 이동
-      router.push('/report')
+      router.push('/main?tab=create-report')
     }
   }
 

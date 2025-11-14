@@ -240,14 +240,14 @@ const renderPortfolioPage = (pageNumber: number, portfolioData: PortfolioData) =
           <View style={styles.headerContent}>
             <View style={styles.leftGroup}>
               <Image src="/image-5.png" style={styles.headerImage} />
-              <Text style={styles.header}>시황 관련 상품</Text>
+              <Text style={styles.header}>추천 투자 포트폴리오</Text>
             </View>
             </View>
         </View>
         <View style={styles.separator} />
 
         {/* 최적 포트폴리오 구성 테이블 */}
-        <Text style={styles.title}>시황 관련 상품</Text>
+        <Text style={styles.title}>최적 포트폴리오 구성</Text>
         <View style={{ flexDirection: 'row', borderBottom: '1pt solid #e2e8f0' }}>
           <Text
             style={{
@@ -334,7 +334,7 @@ const renderPortfolioPage = (pageNumber: number, portfolioData: PortfolioData) =
         ))}
 
         {/* 포트폴리오 최근 성과 테이블 */}
-        <Text style={[styles.title, { marginTop: pxToPt(24) }]}>시황 관련 상품 성과</Text>
+        <Text style={[styles.title, { marginTop: pxToPt(24) }]}>포트폴리오 최근 성과</Text>
         <View style={{ flexDirection: 'row', borderBottom: '1pt solid #e2e8f0' }}>
           <Text
             style={{

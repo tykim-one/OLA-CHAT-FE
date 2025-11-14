@@ -40,9 +40,9 @@ export default function MainReportPage() {
   const handleTabChange = (value: string) => {
     if (value === 'create-report') {
       // 수동 리포트 생성 탭 클릭 시 report 페이지로 이동
-      router.push('/report')
+      router.push('/main?tab=create-report')
     } else {
-      setActiveTab(value)
+      router.push('/main?tab=auto-report')
     }
   }
 
