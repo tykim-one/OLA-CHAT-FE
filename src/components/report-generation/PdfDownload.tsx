@@ -2,6 +2,7 @@
 import { PDFDownloadLink } from '@react-pdf/renderer'
 
 import { PdfReportDocument } from './PdfReportDocument'
+import { Download, Loader } from 'lucide-react'
 
 type PortfolioData = {
   recommendedProducts: {
@@ -50,14 +51,15 @@ export default function ReportPdfDownload({
           <PdfReportDocument data={data} portfolioData={portfolioData} reportMeta={reportMeta} />
         }
         fileName={`${reportMeta.title}.pdf`}
-        className="rounded-xl bg-[#e6f1ff] cursor-pointer border border-[#003f89] text-[#004ca5] px-4 py-2 shadow textbase font-bold"
+        className="rounded-xl bg-white text-black border border-gray-300 hover:bg-gray-200 px-3 py-2 cursor-pointer"
         onClick={() => {
           alert(
             '해당 리포트는 고객에게 제공이 불가하며, 상담 준비 용도로만 활용이 가능한 행내한 자료입니다.',
           )
         }}
       >
-        {({ blob, url, loading }) => (loading ? '생성 중…' : 'PDF 다운로드')}
+       
+        {({ blob, url, loading }) => (loading ? <div className="flex items-center gap-2"><Loader className="h-4 w-4 text-black" aria-hidden="true" />생성 중…</div> : <div className="flex items-center gap-2 text-xs"><Download className="h-4 w-4 text-black" aria-hidden="true" />PDF 다운로드</div>)}
       </PDFDownloadLink>
     </div>
   )

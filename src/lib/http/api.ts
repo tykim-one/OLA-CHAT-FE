@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseURL = 'https://ibk.api.onelineai.com'
+const baseURL = 'http://192.168.1.10:8001'
 
 // Unauthenticated API client
 export const api = axios.create({
@@ -8,11 +8,16 @@ export const api = axios.create({
   timeout: 30000, // 30 seconds
 })
 
-const token = localStorage.getItem('auth_token')
+
 api.interceptors.request.use(
   (config) => {
-    config.headers.set('Authorization', `Bearer ${token}`)
-    // No authentication for this client
+    // auth_token이 필수로 필요함
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('auth_token')
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`
+      }
+    }
     return config
   },
   (error) => Promise.reject(error),

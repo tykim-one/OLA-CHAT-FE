@@ -15,9 +15,11 @@ interface VerificationCodeInputProps {
 }
 
 /**
- * 6자리 인증코드 입력 컴포넌트
+ * 인증코드 입력 컴포넌트
  * 
- * 개별 입력칸으로 구성되며, 자동으로 다음 칸으로 포커스가 이동합니다.
+ * 영문자(대소문자)와 숫자를 입력할 수 있는 개별 입력칸으로 구성되며,
+ * 자동으로 다음 칸으로 포커스가 이동합니다.
+ * 입력된 영문자는 대문자로 자동 변환됩니다.
  * 
  * @example
  * ```tsx
@@ -56,12 +58,12 @@ export const VerificationCodeInput: React.FC<VerificationCodeInputProps> = ({
    * 특정 인덱스의 입력 변경 핸들러
    */
   const handleChange = (index: number, newValue: string) => {
-    // 숫자만 허용
-    const digit = newValue.replace(/\D/g, '').slice(-1)
+    // 영문자(대소문자)와 숫자만 허용, 대문자로 변환
+    const char = newValue.replace(/[^A-Za-z0-9]/g, '').slice(-1).toUpperCase()
     
-    if (digit) {
+    if (char) {
       const newCodeArray = [...codeArray]
-      newCodeArray[index] = digit
+      newCodeArray[index] = char
       const newCode = newCodeArray.join('').trim()
       onChange(newCode)
       
@@ -114,12 +116,13 @@ export const VerificationCodeInput: React.FC<VerificationCodeInputProps> = ({
   const handlePaste = (e: React.ClipboardEvent) => {
     e.preventDefault()
     const pastedData = e.clipboardData.getData('text')
-    const digits = pastedData.replace(/\D/g, '').slice(0, length)
+    // 영문자(대소문자)와 숫자만 허용, 대문자로 변환
+    const chars = pastedData.replace(/[^A-Za-z0-9]/g, '').toUpperCase().slice(0, length)
     
-    if (digits) {
-      onChange(digits)
+    if (chars) {
+      onChange(chars)
       // 마지막 입력된 칸으로 포커스
-      const lastIndex = Math.min(digits.length - 1, length - 1)
+      const lastIndex = Math.min(chars.length - 1, length - 1)
       inputRefs.current[lastIndex]?.focus()
     }
   }
@@ -142,7 +145,7 @@ export const VerificationCodeInput: React.FC<VerificationCodeInputProps> = ({
             inputRefs.current[index] = el
           }}
           type="text"
-          inputMode="numeric"
+          inputMode="text"
           maxLength={1}
           value={digit === ' ' ? '' : digit}
           onChange={(e) => handleChange(index, e.target.value)}

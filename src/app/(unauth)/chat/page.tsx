@@ -86,8 +86,8 @@ function ModernChatPageBase() {
   }
 
   return (
-    <div className="h-screen md:h-screen overflow-hidden md:overflow-y-auto min-w-[340px] max-w-[1024px] w-full rounded-xl">
-      <div className="bg-white h-screen md:h-screen">
+    <div className="overflow-hidden md:overflow-y-auto min-w-[340px] max-w-[1024px] w-full rounded-xl">
+      <div className="bg-white">
         {/* 채팅 컨테이너 - 중앙 정렬 */}
         <div className="max-w-6xl mx-auto h-full">
           <div className="flex justify-center h-full">
@@ -128,9 +128,9 @@ export default function ModernChatPage() {
     <ReactQueryProvider>
       <InitFromQueryParamsProvider>
         <AuthProvider>
-          <AuthGuard>
+          
             <ModernChatPageBase />
-          </AuthGuard>
+         
         </AuthProvider>
       </InitFromQueryParamsProvider>
     </ReactQueryProvider>

@@ -11,13 +11,14 @@ import Header from '@/components/shared/Header'
 import { useDailyReportData } from '@/hooks/useDailyReportData'
 import { DailyReportData } from '@/types/dailyReport'
 import { PDFViewer } from '@react-pdf/renderer'
+import { Download } from 'lucide-react'
 
 const loadingDescription = '데일리 리포트를 불러오는 중입니다. 잠시만 기다려주세요.'
 const errorDescription = '리포트를 불러오는 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.'
 
 export const ReportPdfViewer = ({ reportData }: { reportData: DailyReportData }) => {
   return (
-    <div className="w-full h-screen py-2 flex justify-center bg-transparent overflow-hidden rounded-lg items-center">
+    <div className="w-full h-screen flex justify-center bg-transparent overflow-hidden rounded-lg items-center">
       <PDFViewer 
         width="721px" 
         showToolbar={false}
@@ -98,6 +99,9 @@ const DailyReportPage: React.FC = () => {
       pageClassName="bg-Grayscale-B50 font-pretendard"
       contentClassName="h-full w-full bg-white/80"
       downloadButtonWrapperClassName="right-10"
+      downloadButtonProps={{
+        icon: <Download className="h-4 w-4 text-black" aria-hidden="true" />,
+      }}
     >
       <div className="mx-auto max-w-[1024px] w-full h-full">
         {/* <DailyReportContainer

@@ -84,9 +84,12 @@ export class ChatClient {
     }
   }
 
-  private getHeaders(): Record<string, string> {
+  private getHeaders(): Record<string, string> 
+  {
+    const token = localStorage.getItem('auth_token')
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
     }
 
     if (this.auth) {

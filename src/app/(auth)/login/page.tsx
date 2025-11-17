@@ -49,14 +49,27 @@ const LoginPage = () => {
     }
     
     try {
-      // AuthContext의 login 함수 호출
-    //   await login(email, password)
+      // API 연동 - 로그인
+      const { signIn } = await import('@/services/auth/api')
+      const response = await signIn({ 
+        email, 
+        password 
+      })
+      
+      // 토큰을 로컬 스토리지에 저장
+      if (response.access_token) {
+        localStorage.setItem('auth_token', response.access_token)
+        localStorage.setItem('token_type', response.token_type)
+      }
+      
+      console.log('Login success:', response)
       
       // 로그인 성공 시 메인 페이지로 이동
       router.push('/')
-    } catch (err) {
+    } catch (err: any) {
       // 로그인 실패 시 에러 메시지 설정
-      setError('로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.')
+      const errorMessage = err?.response?.data?.message || '로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.'
+      setError(errorMessage)
       console.error('Login error:', err)
     }
   }

@@ -64,7 +64,7 @@ export const ReportPdfDownloadButton: React.FC<ReportPdfDownloadButtonProps> = (
           <Button
             variant="outline"
             size="sm"
-            className={cn('gap-2 bg-[#004CA5] text-white hover:bg-[#003F8C]', className)}
+            className={cn('gap-2 bg-white text-black border border-gray-300 hover:bg-gray-200 px-3 py-2', className)}
             disabled={loading}
             aria-live="polite"
           >

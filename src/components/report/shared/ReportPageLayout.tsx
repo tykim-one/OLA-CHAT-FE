@@ -2,6 +2,8 @@ import React from 'react'
 
 import { cn } from '@/lib/utils'
 
+import Header from '@/components/shared/Header'
+
 import { ReportPdfDownloadButton } from './ReportPdfDownloadButton'
 
 type ReportPageLayoutProps = {
@@ -27,6 +29,8 @@ type ReportPageLayoutProps = {
   pageClassName?: string
   /** 메인 콘텐츠 래퍼에 Tailwind 클래스를 덧붙입니다. */
   contentClassName?: string
+  /** PDF 버튼을 헤더에 표시할지 여부 (true: 헤더에 표시, false: 하단에 표시) */
+  showButtonInHeader?: boolean
 }
 
 export const ReportPageLayout: React.FC<ReportPageLayoutProps> = ({
@@ -38,6 +42,7 @@ export const ReportPageLayout: React.FC<ReportPageLayoutProps> = ({
   downloadButtonWrapperClassName,
   pageClassName,
   contentClassName,
+  showButtonInHeader = true,
 }) => {
   // PDF 문서가 없다면 레이아웃을 렌더링할 필요가 없습니다.
   if (!pdfDocument) {
@@ -52,23 +57,36 @@ export const ReportPageLayout: React.FC<ReportPageLayoutProps> = ({
     className: downloadButtonClassName,
   } = downloadButtonProps ?? {}
 
+  // PDF 다운로드 버튼 컴포넌트
+  const pdfButton = (
+    <ReportPdfDownloadButton
+      document={pdfDocument}
+      fileName={pdfFileName}
+      idleLabel={idleLabel}
+      loadingLabel={loadingLabel}
+      errorLabel={errorLabel}
+      icon={icon}
+      className={downloadButtonClassName}
+    />
+  )
+
   return (
     <div className={cn('relative flex h-full overflow-y-auto flex-col w-full', pageClassName)}>
-      {/* 공통 헤더가 존재한다면 여기에서 렌더링합니다. */}
-      {header}
+      {/* 헤더 렌더링 */}
+      {showButtonInHeader ? (
+        // showButtonInHeader가 true면 Header에 pdfButton 전달
+        <Header pdfButton={pdfButton} />
+      ) : (
+        // 기존 header prop 사용
+        header
+      )}
 
-      {/* PDF 다운로드 버튼은 페이지 우측 하단에 고정 배치합니다. */}
-      <div className={cn('fixed bottom-4 right-10 z-10', downloadButtonWrapperClassName)}>
-        <ReportPdfDownloadButton
-          document={pdfDocument}
-          fileName={pdfFileName}
-          idleLabel={idleLabel}
-          loadingLabel={loadingLabel}
-          errorLabel={errorLabel}
-          icon={icon}
-          className={downloadButtonClassName}
-        />
-      </div>
+      {/* PDF 다운로드 버튼 - showButtonInHeader가 false일 때만 하단에 표시 */}
+      {!showButtonInHeader && (
+        <div className={cn('fixed bottom-4 right-10 z-10', downloadButtonWrapperClassName)}>
+          {pdfButton}
+        </div>
+      )}
 
       {/* 스크롤 가능한 메인 콘텐츠 영역을 제공합니다. */}
       <main className={cn('flex-1 overflow-y-auto', contentClassName)}>{children}</main>

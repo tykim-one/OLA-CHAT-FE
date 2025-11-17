@@ -45,16 +45,23 @@ export const SignupVerifyStep: React.FC = () => {
     try {
       setIsLoading(true)
       
-      // TODO: API 연동 - 인증코드 검증
-      // const result = await verifyCode(email, verificationCode)
+      // API 연동 - 인증코드 검증
+      const { verifyEmail } = await import('@/services/auth/api')
+      const result = await verifyEmail({ 
+        email, 
+        code: verificationCode 
+      })
       
-      // 임시: 1초 대기 후 검증 성공
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
-      setEmailVerified(true)
-      goToNextStep()
-    } catch (err) {
-      setError('인증코드가 올바르지 않습니다. 다시 확인해주세요.')
+      console.log(result)
+      if (result.detail === 'Verification code confirmed successfully.') {
+        setEmailVerified(true)
+        goToNextStep()
+      } else {
+        setError('인증코드가 올바르지 않습니다. 다시 확인해주세요.')
+      }
+    } catch (err: any) {
+      const errorMessage = err?.response?.data?.message || '인증코드가 올바르지 않습니다. 다시 확인해주세요.'
+      setError(errorMessage)
       console.error('Verify code error:', err)
     } finally {
       setIsLoading(false)
@@ -71,17 +78,16 @@ export const SignupVerifyStep: React.FC = () => {
       setIsLoading(true)
       setError('')
       
-      // TODO: API 연동 - 인증코드 재전송
-      // await sendVerificationCode(email)
-      
-      // 임시: 1초 대기
-      await new Promise(resolve => setTimeout(resolve, 1000))
+      // API 연동 - 인증코드 재전송
+      const { sendVerificationCode } = await import('@/services/auth/api')
+      await sendVerificationCode({ email })
       
       setCanResend(false)
       setResendTimer(60)
       setVerificationCode('')
-    } catch (err) {
-      setError('인증코드 재전송에 실패했습니다.')
+    } catch (err: any) {
+      const errorMessage = err?.response?.data?.message || '인증코드 재전송에 실패했습니다.'
+      setError(errorMessage)
       console.error('Resend code error:', err)
     } finally {
       setIsLoading(false)

@@ -31,14 +31,21 @@ export default function Header({ onLogin, pdfButton }: HeaderProps) {
   }
   return (
     <header className="self-stretch w-full px-3 pb-2 border-b border-gray-300 inline-flex justify-between items-center overflow-hidden bg-white/80 rounded-t-xl ">
-      <div className="w-full flex justify-between items-center py-3">
-        <div className="flex items-center space-x-2.5 pt-2">
+      <div className="w-full flex justify-between items-center py-3 pt-5">
+        <div className="flex items-center space-x-2.5">
          <ChevronLeftIcon className="w-4 h-4 cursor-pointer text-black" onClick={() => router.back()} />
           <span className="text-blue-500 text-base font-bold">
             리포트 기본 정보 입력
           </span>
         
         </div>
+        
+        {/* PDF 다운로드 버튼 */}
+        {pdfButton && (
+          <div className="flex items-center">
+            {pdfButton}
+          </div>
+        )}
        
       </div>
      

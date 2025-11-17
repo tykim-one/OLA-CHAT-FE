@@ -44,16 +44,15 @@ export const SignupEmailStep: React.FC = () => {
     try {
       setIsLoading(true)
       
-      // TODO: API 연동 - 인증코드 발송
-      // await sendVerificationCode(localEmail)
-      
-      // 임시: 2초 대기
-      await new Promise(resolve => setTimeout(resolve, 2000))
+      // API 연동 - 인증코드 발송
+      const { sendVerificationCode } = await import('@/services/auth/api')
+      await sendVerificationCode({ email: localEmail })
       
       setEmail(localEmail)
       goToNextStep()
-    } catch (err) {
-      setError('인증코드 발송에 실패했습니다. 다시 시도해주세요.')
+    } catch (err: any) {
+      const errorMessage = err?.response?.data?.message || '인증코드 발송에 실패했습니다. 다시 시도해주세요.'
+      setError(errorMessage)
       console.error('Send verification code error:', err)
     } finally {
       setIsLoading(false)
