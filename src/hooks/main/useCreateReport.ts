@@ -125,7 +125,7 @@ export function useReportCreationViewModel() {
     }
 
     try {
-      // await generateReportMutation.mutateAsync(reportParameters)
+      await generateReportMutation.mutateAsync(reportParameters)
     } catch (error) {
       // 에러 처리는 이미 mutation의 onError에서 처리됨
     }

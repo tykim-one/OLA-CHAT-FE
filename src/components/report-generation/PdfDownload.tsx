@@ -59,7 +59,7 @@ export default function ReportPdfDownload({
         }}
       >
        
-        {({ blob, url, loading }) => (loading ? <div className="flex items-center gap-2"><Loader className="h-4 w-4 text-black" aria-hidden="true" />생성 중…</div> : <div className="flex items-center gap-2 text-xs"><Download className="h-4 w-4 text-black" aria-hidden="true" />PDF 다운로드</div>)}
+        {({ blob, url, loading }) => (loading ? <div className="flex items-center gap-2"><Loader className="h-4 w-4 text-black" aria-hidden="true" />생성 중…</div> : <div className="flex items-center gap-2 text-xs"><Download className="h-4 w-4 !text-black" aria-hidden="true" />PDF 다운로드</div>)}
       </PDFDownloadLink>
     </div>
   )

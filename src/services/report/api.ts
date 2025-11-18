@@ -14,3 +14,9 @@ export const getReportData = async (args: T.GetReportDataRequest) => {
     .get<T.GetReportDataResponse>(`${endpoints.IBK_REPORT_GET_DATA}/${args.id}`)
     .then((d) => d.data)
 }
+
+export const getContentMeta = async () => {
+  return api
+    .get<T.GetContentMetaResponse>(endpoints.IBK_REPORT_GENERATE)
+    .then((d) => d.data)
+}

@@ -27,7 +27,7 @@ export const useMainPageViewModel = (): MainPageViewModel => {
         headers: {
           'Content-Type': 'application/json',
           // Authorization: `Bearer ${token}`,
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlYzYzNWY0OS1hYmY5LTQ0ODktYWY4OS00ZjZhOTI3NmVmMWIiLCJleHAiOjE3NjMzNjI4MTMsImlhdCI6MTc2MzM1OTIxM30.FBEKAnANoIFcrdBaJAmc9RhYJ-81-Zst-FT6MtldpMo`,
+          Authorization: `Bearer ${token}`,
         },
       })
 
@@ -84,7 +84,7 @@ export const useMainPageViewModel = (): MainPageViewModel => {
   // 리포트 삭제 핸들러
   const handleDeleteReport = async (reportId: string): Promise<void> => {
     try {
-      await api.delete(`/api/menual-report/content-meta/${reportId}`)
+      await api.delete(`/api/manual-report/content-meta/${reportId}`)
       // 삭제 후 목록 새로고침
       await fetchContentMeta()
     } catch (error) {

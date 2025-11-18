@@ -3,7 +3,7 @@
 import { useParams } from 'next/navigation'
 import React from 'react'
 
-import { FileDown } from 'lucide-react'
+import { Download, FileDown } from 'lucide-react'
 import { PDFViewer } from '@react-pdf/renderer'
 
 import { PdfDailySummaryDocument } from '@/components/report-generation/PdfDailySummaryDocument'
@@ -110,7 +110,7 @@ const DailySummaryPage: React.FC = () => {
       contentClassName="pt-8 pb-20"
       downloadButtonWrapperClassName="right-10"
       downloadButtonProps={{
-        icon: <FileDown className="h-4 w-4 text-white" aria-hidden="true" />,
+        icon: <Download className="h-4 w-4 text-black" aria-hidden="true" />,
       }}
     >
       <div className="mx-auto max-w-[1024px] w-full h-full">

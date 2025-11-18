@@ -45,3 +45,13 @@ export type ReportDataItem = {
 
 // API 응답은 배열 형태
 export type GetReportDataResponse = ReportDataItem[]
+
+// Get Content Meta Request/Response types
+export type GetContentMetaRequest = {
+  id: string
+}
+
+export type GetContentMetaResponse = {
+  data: []
+  items: []
+}

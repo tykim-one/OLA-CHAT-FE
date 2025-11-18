@@ -53,3 +53,4 @@ export const getReportDataQueryOptions = (id: string, options?: GetReportDataQue
     enabled: !!id, // id가 있을 때만 쿼리 실행
   }
 }
+

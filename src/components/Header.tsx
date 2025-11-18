@@ -24,11 +24,11 @@ import { useAuth } from '@/providers/AuthContext'
 const Header = () => {
   const router = useRouter()
   const pathname = usePathname()
-//   const { user, logout } = useAuth()
+  const { user, logout } = useAuth()
 
   // 로그아웃 버튼 클릭 핸들러
   const handleLogout = () => {
-    // logout()
+    logout()
     router.push('/login')
   }
 
